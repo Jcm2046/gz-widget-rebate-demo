@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>厅内挂件展示高额返水 · 交互演示</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font:14px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Helvetica Neue",Arial,sans-serif;color:#1c2330;background:#f4f5f7}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.wrap{max-width:1240px;margin:0 auto;padding:24px 20px 56px}
+.hd h1{font-size:22px;line-height:1.3;font-weight:700}
+.hd p{color:#5b6472;margin-top:4px;font-size:13.5px}
+.main{display:grid;grid-template-columns:330px 390px minmax(0,1fr);grid-template-rows:auto 1fr;grid-template-areas:"sc mid now" "ctl mid now";gap:12px 24px;margin-top:18px;align-items:start}
+.a-sc{grid-area:sc}.a-ctl{grid-area:ctl}.a-mid{grid-area:mid}.a-now{grid-area:now}
+.card{background:#fff;border:1px solid #e4e6ea;border-radius:12px;padding:14px 16px}
+.card+.card{margin-top:12px}
+.card h2{font-size:14.5px;line-height:1.4;font-weight:700;margin-bottom:8px}
+.sc{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.sc button{padding:7px 9px;border-radius:8px;background:#f0f1f4;font-size:12.5px;line-height:1.3;text-align:left;color:#2b3340}
+.sc button.on{background:#1f2937;color:#fff;font-weight:600}
+.cg{margin-top:10px}
+.cg:first-of-type{margin-top:0}
+.cg>label{display:block;font-size:12px;line-height:18px;color:#5b6472;margin-bottom:3px}
+.seg{display:inline-flex;flex-wrap:wrap;gap:2px;background:#e3e6ea;border-radius:8px;padding:2px;max-width:100%}
+.seg button{padding:3px 9px;border-radius:6px;font-size:12.5px;color:#3a4350;white-space:nowrap}
+.seg button.on{background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.16);font-weight:600;color:#111827}
+.seg.off{opacity:.45;pointer-events:none}
+.betbtn{margin-top:10px;padding:5px 11px;border-radius:7px;font-size:12.5px;background:#1f2937;color:#fff;font-weight:600}
+.betnow{margin-left:8px;font-size:12.5px;font-weight:600;font-variant-numeric:tabular-nums}
+details summary{cursor:pointer;font-size:14.5px;font-weight:700;list-style-position:inside}
+details[open] summary{margin-bottom:8px}
+.a-mid{display:flex;flex-direction:column;align-items:center}
+.tools{display:flex;align-items:center;gap:14px;margin-top:10px;font-size:12.5px;color:#5b6472}
+.tools button{padding:5px 11px;border-radius:7px;background:#e3e6ea;color:#1c2330;font-weight:600}
+.now h3{font-size:16px;line-height:1.35;font-weight:700;margin-bottom:8px}
+.row{display:grid;grid-template-columns:52px minmax(0,1fr);gap:8px;padding:7px 0;border-top:1px solid #edeff2;font-size:13px}
+.row b{font-weight:600;color:#5b6472}
+.row span{min-width:0;overflow-wrap:anywhere}
+.tag{display:inline-block;padding:0 6px;border-radius:5px;background:#fff1e6;color:#b3541b;font-weight:600}
+.card ol{padding-left:18px;font-size:13px;color:#39424f}
+.card li{margin:4px 0}
+@media(max-width:1180px){.main{grid-template-columns:330px 390px;grid-template-rows:auto auto auto;grid-template-areas:"sc mid" "ctl mid" "now now"}}
+@media(max-width:780px){.wrap{padding:16px 12px 40px}.main{grid-template-columns:minmax(0,1fr);grid-template-rows:none;grid-template-areas:"sc" "mid" "ctl" "now"}.a-mid{overflow:hidden}}
+
+.phone{position:relative;width:390px;height:844px;overflow:hidden;border-radius:16px;background:#0b0e14 url(assets/game-superace.jpg) top center/390px auto no-repeat;box-shadow:0 10px 26px rgba(16,24,40,.22);color:#fff;font-family:Inter,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;user-select:none;-webkit-user-select:none}
+.phone img{display:block}
+.mask{position:absolute;inset:0;z-index:5;cursor:pointer}
+.mask.dim{background:rgba(0,0,0,.45)}
+.rbt{position:absolute;right:16px;top:150px;width:59px;height:76px;z-index:7;cursor:pointer}
+.rbt>img{width:59px;height:76px}
+.rbt.open{top:125px;right:20px}
+.rbt.in{animation:rin .35s ease-out}
+@keyframes rin{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
+.pill{position:absolute;left:50%;bottom:-11px;transform:translateX(-50%);height:26px;padding:0 9px;white-space:nowrap;font-size:11px;font-weight:600;line-height:26px;color:#fff;background:url(assets/pill-bg.png) center/100% 100% no-repeat}
+.pill.au{height:20px;line-height:20px;bottom:-8px;padding:0 9px;border-radius:10px;background:linear-gradient(180deg,#FFE08A,#F5A623);color:#3A2300;font-weight:800;box-shadow:0 0 0 1.5px #fff5cf,0 2px 6px rgba(0,0,0,.45)}
+.dock{position:absolute;right:-3px;top:150px;width:30px;height:40px;z-index:6;cursor:pointer}
+.dock>img{width:30px;height:40px;opacity:.92}
+.dtag{position:absolute;right:3px;top:38px;min-width:32px;height:16px;padding:0 5px;border-radius:6px 0 0 6px;font-size:10px;font-weight:800;line-height:16px;text-align:center;white-space:nowrap;background:linear-gradient(180deg,#FFE08A,#F5A623);color:#3A2300;box-shadow:0 1px 4px rgba(0,0,0,.5)}
+.dtag.lk{background:#252328;color:oklab(.872 .0143 .1346);box-shadow:inset 0 0 0 1px rgba(251,203,98,.5)}
+.dtag.pop{animation:pop .5s ease-out}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.28)}100%{transform:scale(1)}}
+.flt{position:absolute;right:42px;top:176px;z-index:8;font-size:13px;font-weight:800;color:#FFE08A;text-shadow:0 1px 3px rgba(0,0,0,.8);animation:flt 1.5s ease-out forwards;pointer-events:none}
+@keyframes flt{0%{opacity:0;transform:translateY(10px)}20%{opacity:1}100%{opacity:0;transform:translateY(-30px)}}
+.say{position:absolute;right:36px;top:146px;width:206px;z-index:7;padding:8px 10px;border-radius:10px;background:#252328;box-shadow:0 0 0 1px rgba(251,203,98,.55),0 4px 12px rgba(0,0,0,.5);font-size:12px;line-height:16px;color:#ECE9F1;cursor:pointer;animation:say .28s ease-out}
+.say:after{content:"";position:absolute;right:-6px;top:14px;width:12px;height:12px;background:#252328;transform:rotate(45deg);box-shadow:1px -1px 0 rgba(251,203,98,.55)}
+.say b{color:oklab(.872 .0143 .1346)}
+.say .kk{display:block;margin-top:2px;font-size:10.5px;color:oklab(.714 .0145 -.0256)}
+@keyframes say{from{opacity:0;transform:translateX(10px) scale(.96)}to{opacity:1;transform:none}}
+.toast{position:absolute;left:50%;top:70px;transform:translateX(-50%);z-index:12;max-width:320px;padding:7px 12px;border-radius:8px;background:rgba(0,0,0,.82);font-size:12.5px;line-height:1.35;text-align:center;white-space:nowrap;animation:say .2s ease-out}
+
+.pn{position:absolute;right:12px;top:201px;z-index:8;width:max-content;min-width:168px;max-width:206px;max-height:640px;overflow:hidden;padding:12px;border-radius:12px;background:#252328;box-shadow:0 6px 18px rgba(0,0,0,.4);animation:pnin .18s ease-out;transform-origin:top right}
+@keyframes pnin{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
+.pn-b{display:flex;justify-content:space-between;gap:14px}
+.pn-b section{display:flex;flex-direction:column;align-items:center}
+.pn-b img{width:32px;height:32px}
+.pn-b span{font-size:12px;line-height:20px;color:oklab(.714 .0145 -.0256)}
+.pn-d{margin-top:8px;height:1px;background:oklab(.4165 0 0)}
+.rb{margin-top:12px;padding:4px;border-radius:8px;background:#181818;font-weight:700;font-size:11px;line-height:14px}
+.rb0{display:flex;justify-content:space-between;align-items:center;min-height:40px}
+.rb0 .l{display:flex;align-items:center;gap:0}
+.rb0 img{width:39px;height:32px}
+.rb0 em{font-style:normal;color:oklab(.872 .0143 .1346);padding-right:4px}
+.gold{color:oklab(.872 .0143 .1346)}
+.act{padding:7px 8px 8px;background:linear-gradient(180deg,#2C2214,#1B1712);box-shadow:inset 0 0 0 1px rgba(251,203,98,.32)}
+.act.tap{cursor:pointer}
+.ah{display:flex;align-items:center;gap:5px;font-size:11px}
+.ah .coin{width:18px;height:18px;flex:none}
+.ah b{margin-left:auto;font-size:13px;color:oklab(.872 .0143 .1346)}
+.ah i{font-style:normal;color:oklab(.714 .0145 -.0256);margin-left:2px;font-size:12px}
+.ln{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:6px;font-weight:600}
+.ln span{font-size:10.5px;color:oklab(.78 .012 -.02);white-space:nowrap}
+.ln b{font-size:11px;font-weight:700;white-space:nowrap;display:inline-flex;align-items:center;gap:3px;font-variant-numeric:tabular-nums}
+.ln .dim{color:#9c97a6}
+.lk{width:10px;height:11.5px;flex:none}
+.max{display:inline-block;padding:0 3px;height:12px;line-height:12px;border-radius:3px;font-size:8.5px;font-weight:900;background:linear-gradient(180deg,#FFE08A,#F5A623);color:#3A2300;letter-spacing:.2px}
+.ct{margin-top:3px;font-size:9.5px;line-height:12px;font-weight:600;text-align:right;color:oklab(.872 .0143 .1346);white-space:nowrap}
+.ct.g{color:oklab(.714 .0145 -.0256);font-weight:500}
+.ct.l{text-align:left}
+.bar{position:relative;height:6px;margin-top:7px;border-radius:3px;background:#3a3640;overflow:hidden}
+.bar i{position:absolute;left:0;top:0;bottom:0;border-radius:3px;background:linear-gradient(90deg,#F5A623,#FFE08A);transition:width .35s ease-out}
+.yd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;padding:6px 6px 6px 8px;border-radius:8px;background:#34280F;box-shadow:inset 0 0 0 1px rgba(251,203,98,.45)}
+.yd div{font-size:9.5px;line-height:12px;color:#d9cfae;font-weight:500;white-space:nowrap}
+.yd div b{display:block;font-size:12px;line-height:15px;color:#FFE08A;font-weight:800}
+.bn{flex:none;height:24px;padding:0 10px;border-radius:12px;background:linear-gradient(180deg,#FFE08A,#F5A623);color:#3A2300;font-size:11px;font-weight:800;line-height:24px;white-space:nowrap}
+.jb{margin-top:8px;padding:8px;border-radius:8px;background:linear-gradient(180deg,#2C2214,#1B1712);box-shadow:inset 0 0 0 1px rgba(251,203,98,.32)}
+.jb p{font-size:10.5px;line-height:14px;font-weight:600;color:#ECE9F1;margin-bottom:6px}
+.jb p b{color:oklab(.872 .0143 .1346);font-size:12.5px}
+.jb p s{color:#8d8896;font-weight:500}
+.jb .bn{display:block;width:100%;text-align:center}
+.nt{margin-top:6px;font-size:9px;line-height:11px;font-weight:500;color:#8d8896;text-align:center;white-space:nowrap}
+
+.bt{display:flex;justify-content:space-between;align-items:center;font-size:10.5px;font-weight:600;color:oklab(.78 .012 -.02)}
+.bt b{color:oklab(.872 .0143 .1346);font-size:11px}
+.amt{margin-top:6px;font-size:22px;line-height:26px;font-weight:800;color:#FFE08A;letter-spacing:-.2px;display:flex;align-items:center;gap:5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.amt.lock{font-size:17px;line-height:22px}
+.amt.lock small{font-size:10.5px;font-weight:600;color:#ECE9F1;letter-spacing:0}
+.bf{display:flex;justify-content:space-between;margin-top:3px;font-size:9.5px;line-height:12px;font-weight:500;color:oklab(.714 .0145 -.0256);white-space:nowrap;gap:8px}
+
+.er{display:flex;align-items:center;gap:6px;min-height:40px;padding:2px 4px;cursor:pointer}
+.er .coin{width:22px;height:22px;flex:none}
+.er .t{flex:1;min-width:0;font-size:11px}
+.er .t small{display:block;font-size:9.5px;line-height:12px;font-weight:500;color:oklab(.78 .012 -.02);white-space:nowrap}
+.er em{font-style:normal;color:oklab(.872 .0143 .1346);font-size:12px}
+.er .ch{color:#a7a1b2;font-size:14px;line-height:1}
+.er .dot{position:absolute;width:7px;height:7px;border-radius:50%;background:#f43f4e;margin:-16px 0 0 15px}
+.sheet{position:absolute;left:0;right:0;bottom:0;height:486px;z-index:9;border-radius:18px 18px 0 0;background:#1E1C22;box-shadow:0 -6px 20px rgba(0,0,0,.45);padding:12px 16px 16px;animation:shin .24s ease-out}
+@keyframes shin{from{transform:translateY(70px);opacity:.3}to{transform:none;opacity:1}}
+.sh-g{width:36px;height:4px;border-radius:2px;background:#4d4955;margin:0 auto 10px}
+.sh-h{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700}
+.sh-h .coin{width:24px;height:24px}
+.sh-h b{color:oklab(.872 .0143 .1346)}
+.sh-x{margin-left:auto;font-size:19px;line-height:1;color:#a7a1b2;cursor:pointer;padding:2px 4px}
+.sh-m{display:flex;align-items:center;gap:14px;margin-top:12px;padding:12px;border-radius:12px;background:#28252C}
+.gau{position:relative;width:98px;height:98px;flex:none}
+.gau svg{width:98px;height:98px;transform:rotate(-90deg)}
+.gau div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#FFE08A;line-height:18px;font-variant-numeric:tabular-nums}
+.gau small{font-size:9.5px;line-height:12px;font-weight:500;color:oklab(.714 .0145 -.0256)}
+.sh-r{flex:1;min-width:0}
+.sh-r .ln{margin-top:7px}
+.sh-r .ln:first-child{margin-top:0}
+.sh-r .ln span{font-size:12px}
+.sh-r .ln b{font-size:13px}
+.sh-r .ct{font-size:11px;line-height:14px;margin-top:6px}
+.sh-y{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding:9px 10px;border-radius:12px;background:#34280F;box-shadow:inset 0 0 0 1px rgba(251,203,98,.45)}
+.sh-y div{font-size:11px;line-height:14px;color:#d9cfae}
+.sh-y b{display:block;font-size:15px;line-height:19px;color:#FFE08A;font-weight:800}
+.sh-y .bn{height:30px;line-height:30px;border-radius:15px;font-size:12.5px;padding:0 14px}
+.sh-t{margin-top:12px;font-size:12px;font-weight:700;color:#ECE9F1}
+.sh-gs{display:flex;gap:8px;margin-top:6px}
+.sh-l{display:block;margin-top:12px;text-align:center;font-size:12.5px;font-weight:600;color:oklab(.872 .0143 .1346);cursor:pointer}
+.gt{display:block;border-radius:8px;background-image:url(assets/shot-pahiyas.webp);background-repeat:no-repeat;position:relative;flex:none}
+.gt u{position:absolute;right:2px;top:2px;text-decoration:none;font-size:9px;line-height:13px;padding:0 3px;border-radius:4px;font-weight:800;background:linear-gradient(180deg,#FFE08A,#F5A623);color:#3A2300}
+
+.fx{display:flex;align-items:center;gap:6px}
+.fx svg.ch{width:64px;height:58px;flex:none}
+.fx .r{flex:1;min-width:0}
+.fx .r .lb{font-size:9.5px;line-height:12px;font-weight:600;color:oklab(.78 .012 -.02);white-space:nowrap}
+.fx .r .am{font-size:16px;line-height:20px;font-weight:800;color:#FFE08A;display:flex;align-items:center;gap:3px;white-space:nowrap}
+.fx .r .am.dim{color:#a8a3b2}
+.shine{animation:shine 1.6s ease-in-out infinite}
+@keyframes shine{0%,100%{opacity:.55}50%{opacity:1}}
+
+.dlc{position:relative;display:flex;align-items:center;gap:6px;margin-top:8px;height:62px;padding:0 7px;border-radius:8px;background:linear-gradient(90deg,#2C3A6E,#5F6E9E)}
+.dlc img{width:40px;height:38px;border-radius:6px;object-fit:cover}
+.dlc p{flex:1;font-size:9px;line-height:11px;font-weight:500;text-align:center}
+.dlc p b{display:block;margin-top:5px;height:18px;line-height:18px;border-radius:9px;background:#E5484D;font-size:10px;font-weight:600}
+.dlc i{position:absolute;right:-3px;top:-3px;width:8px;height:8px;border-radius:50%;background:#E5484D}
+
+.hm{position:absolute;inset:0;z-index:10;background:rgba(0,0,0,.65)}
+.hs{position:absolute;left:0;right:0;bottom:0;height:675px;z-index:11;border-radius:16px 16px 0 0;background:#2F3542;overflow:hidden;animation:shin .24s ease-out}
+.hs-h{position:relative;height:58px;line-height:58px;text-align:center;font-size:16px;font-weight:600}
+.hs-x{position:absolute;right:14px;top:0;font-size:22px;color:#c7c2d0;cursor:pointer}
+.hs-b{position:absolute;left:0;right:0;top:58px;bottom:0;background:#1b1f27 url(assets/act-page.png) top center/390px auto no-repeat}
+.hs-d{position:absolute;inset:0;background:#2F3542 url(assets/deposit-drawer.png) top center/390px auto no-repeat}
+.hs-t{position:absolute;left:50%;top:150px;transform:translateX(-50%);padding:8px 14px;border-radius:8px;background:rgba(0,0,0,.82);font-size:13px;font-weight:600;white-space:nowrap}
+.hs-p{position:absolute;left:49px;right:49px;top:120px;padding:20px 16px 16px;border-radius:14px;background:#2F3542;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.hs-p h4{font-size:17px;font-weight:700;margin-bottom:6px}
+.hs-p p{font-size:13px;line-height:19px;color:#c7c2d0;margin-bottom:12px}
+.hs-p em{display:block;font-style:normal;font-size:18px;font-weight:800;color:#EAC070;margin-bottom:14px}
+.hs-p button{width:100%;height:40px;border-radius:9px;background:#E5484D;color:#fff;font-size:15px;font-weight:600}
+.hs-ok{position:absolute;left:16px;right:16px;bottom:14px;height:38px;border-radius:9px;background:#1f2937;color:#FFE08A;font-size:13px;font-weight:700;box-shadow:0 0 0 1px rgba(251,203,98,.5)}
+.hs-b.anc{background-image:url(assets/act-yesterday.png);background-size:390px auto}
+.hs-b.anc.cl{background-image:url(assets/act-yesterday-claimed.png)}
+.hs-amt{position:absolute;left:45px;top:44px;font:800 24px/32px Inter,Arial,sans-serif;color:#FF5A1F}
+.lst{display:grid;grid-template-columns:70px 70px;gap:8px;justify-content:space-between;margin-top:8px;max-height:148px;overflow:hidden}
+.say.pv{right:84px;top:156px}
+
+.gh{margin-top:8px;font-size:11px;font-weight:700;color:#ECE9F1;display:flex;align-items:center;gap:4px}
+.gh b{color:oklab(.872 .0143 .1346)}
+.gg{display:grid;grid-template-columns:62px 62px;gap:8px 8px;margin-top:6px;justify-content:space-between}
+
+/* 公开演示新增 */
+.pn.app{border-radius:24px;box-shadow:0 0 0 1px #413C48,0 6px 18px rgba(0,0,0,.4)}
+.pill.app{height:22px;line-height:22px;bottom:-9px;border-radius:11px;background:#2A2F3B}
+.mask.d54{background:rgba(0,0,0,.54)}
+.hs.full{height:100%;border-radius:0}
+.hs-load{position:absolute;left:0;right:0;top:58px;bottom:0;display:flex;align-items:center;justify-content:center;background:#1b1f27}
+.spin{width:28px;height:28px;border-radius:50%;border:3px solid rgba(255,255,255,.2);border-top-color:#FBCB62;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.say{width:auto;max-width:206px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hd">
+    <h1>厅内挂件展示高额返水 · 交互演示</h1>
+    <p>活动游戏里，小机器人显示活动比例、今日投注和今日返水，报名、充值、领取都不退出游戏。选一个场景，或者直接点手机里的小机器人。</p>
+  </header>
+  <div class="main">
+    <section class="card a-sc"><h2>选场景</h2><div class="sc" id="sc"></div></section>
+    <section class="card a-ctl"><details id="dt" open><summary>手动调状态</summary><div id="ctl"></div><button class="betbtn" id="bet">下注 +₱100</button><span class="betnow" id="betnow"></span></details></section>
+    <section class="a-mid">
+      <div id="box"><div class="phone" id="ph"></div></div>
+      <div class="tools"><button id="replay">重播进厅</button><span>预览 3.5 秒后吸边</span></div>
+    </section>
+    <section class="a-now">
+      <div class="card now"><h3 id="nowt"></h3><div id="nowb"></div></div>
+      <div class="card"><h2>规则要点</h2><ol>
+        <li>活动游戏不显示 VIP 返水，未报名也一样。</li>
+        <li>吸边后只在昨日待领、未报名、快到门槛三个时刻开口，每种每天 1 次，3 秒后收起。</li>
+        <li>今日投注是活动所配游戏的合计，和活动页同一个数。</li>
+        <li>Join Now、Claim 打开活动半屏并自动执行，Deposit to Join 打开充值，都不退出游戏。</li>
+        <li>Claim 打开后定位到 Yesterday's Rebate 区块，不用上下滑。</li>
+        <li>H5 和 App 逻辑相同；App 没有下载卡和推荐游戏，充值走原生页。</li>
+      </ol></div>
+      <div class="card"><h2>演示说明</h2><ol>
+        <li>金额都是示例：比例 1.5%、每日门槛 ₱500、每日上限 ₱200。</li>
+        <li>半屏里的活动页和充值页是示意图，真实内容以线上页面为准。</li>
+        <li>视觉是建议稿，最终以 UI 稿为准。</li>
+      </ol></div>
+    </section>
+  </div>
+</div>
+<script>
+const A={rate:.015,thr:500,cap:200,vip:.0008,games:8,yest:120};
+const S0={user:'joined',bet:0,yest:0,kyc:1,game:'act',phase:'live'};
+let G={...S0,end:'h5',many:0,list:1,bet:350};
+const V={view:'preview',half:null,say:null,said:{},pop:false,claimed:false,load:false,tip:''};
+let scId='near',tPre,tSay,tAct,tTip;
+
+const r2=n=>Math.round(n*100)/100;
+const fmt=n=>'₱'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const pct=r=>parseFloat((r*100).toFixed(2))+'%';
+function model(){
+  const raw=r2(G.bet*A.rate),capped=raw>=A.cap,reb=Math.min(raw,A.cap),gap=Math.max(A.thr-G.bet,0),joined=G.user==='joined';
+  return{reb,gap,joined,lv:!joined?G.user:capped?'cap':gap>0?(G.bet>0?'lock':'zero'):'open',
+    hit:G.game==='act'&&G.phase==='live',grace:G.game==='act'&&G.phase==='ended'&&G.yest>0};
+}
+const COIN='<svg class="coin" viewBox="0 0 24 24"><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE9A8"/><stop offset="1" stop-color="#F5A623"/></linearGradient></defs><circle cx="12" cy="12" r="11" fill="url(#cg)" stroke="#B9770E" stroke-width="1"/><circle cx="12" cy="12" r="8" fill="none" stroke="#C98A16" stroke-width="1"/><text x="12" y="16.4" text-anchor="middle" font-size="12" font-weight="800" fill="#7A4B05" font-family="Arial">₱</text></svg>';
+const LOCK='<svg class="lk" viewBox="0 0 12 14"><path d="M3 6V4a3 3 0 0 1 6 0v2" fill="none" stroke="#c9c3d3" stroke-width="1.6"/><rect x="1" y="6" width="10" height="7.4" rx="1.6" fill="#c9c3d3"/></svg>';
+const MAX='<span class="max">MAX</span>';
+const TILES=[[517,553],[630,553],[517,667],[630,667]];
+const tile=i=>{const k=.7,[x,y]=TILES[i];return `<span class="gt" style="width:70px;height:70px;background-size:${865*k}px auto;background-position:-${x*k}px -${y*k}px"></span>`};
+const ln=(l,v,c='')=>`<div class="ln"><span>${l}</span><b class="${c}">${v}</b></div>`;
+const BTN='<div class="pn-b"><section><img src="assets/ic-exit.webp" alt=""><span>Exit</span></section><section><img src="assets/ic-deposit.webp" alt=""><span>Deposit</span></section><section><img src="assets/ic-reload.webp" alt=""><span>Reload</span></section></div>';
+const VIPROW=()=>`<section class="rb rb0"><div class="l"><img src="assets/ic-vip.png" alt=""><span>Rebate</span></div><em>${pct(A.vip)}</em></section>`;
+const DL='<div class="dlc"><img src="assets/dl-avatar.png" alt=""><p>Unlock Fun with Exclusive Features<b>Download</b></p><i></i></div>';
+const HEAD=()=>`<div class="ah">${COIN}<span>Rebate</span><b>${pct(A.rate)}</b></div>`;
+function joinBlock(){
+  const d=G.user==='deposit';
+  return `<section class="rb act">${HEAD()}<div class="ct g l" style="margin-top:6px">${d?'Deposit first to join':'Join to earn rebate'}</div><button class="bn" style="display:block;width:100%;margin-top:6px" data-a="${d?'deposit':'join'}">${d?'Deposit to Join':'Join Now'}</button></section>`;
+}
+function actBlock(m){
+  const bet=ln("Today's Bet",fmt(G.bet))+(G.many?`<div class="ct g">All ${A.games} eligible games</div>`:'');
+  const reb=m.lv==='cap'?ln("Today's rebate",fmt(m.reb)+MAX,'gold'):m.lv==='open'?ln("Today's rebate",fmt(m.reb),'gold'):ln("Today's rebate",LOCK+fmt(m.reb),'dim');
+  const cap=m.lv==='cap'?'<div class="ct">Daily cap reached</div>':m.lv==='open'?'<div class="ct">Claimable tomorrow.</div>':m.lv==='zero'?`<div class="ct g">Bet ${fmt(A.thr)} to unlock</div>`:`<div class="ct g">Bet ${fmt(m.gap)} more to unlock</div>`;
+  return `<section class="rb act">${HEAD()}${bet}${reb}${cap}</section>`;
+}
+const YD=()=>`<div class="yd"><div><b>${fmt(G.yest)}</b>Yesterday</div><button class="bn" data-a="claim">Claim</button></div>`;
+const LIST=()=>`<div class="lst">${[0,1,2,3].map(tile).join('')}</div>`;
+function panel(m){
+  const app=G.end==='app';let h=BTN;
+  if(!app)h+='<div class="pn-d"></div>'+DL;
+  if(m.hit)h+=m.joined?actBlock(m):joinBlock();else if(!app)h+=VIPROW();
+  if(G.yest&&(m.hit||m.grace))h+=YD();
+  if(!app&&G.list)h+=LIST();
+  return h;
+}
+function sayList(m){
+  const a=[];
+  if(G.game!=='act')return a;
+  if(G.yest&&(m.hit||m.grace))a.push('claim');
+  if(m.hit&&!m.joined)a.push(G.user);
+  if(m.hit&&m.lv==='lock'&&G.bet>=A.thr*.7)a.push('near');
+  return a;
+}
+function sayHtml(t,m){
+  if(t==='claim')return `<b>${fmt(G.yest)}</b> rebate is ready! Claim before 23:59 today.`;
+  if(t==='join')return `Join to earn <b>${pct(A.rate)}</b> rebate.`;
+  if(t==='deposit')return `Deposit to join the <b>${pct(A.rate)}</b> rebate.`;
+  return `Just <b>${fmt(m.gap)}</b> more to unlock!`;
+}
+const sayTxt=(t,m)=>sayHtml(t,m).replace(/<[^>]+>/g,'');
+const pillText=m=>m.hit?(m.joined?pct(A.rate):'Join '+pct(A.rate)):pct(A.vip);
+function half(){
+  if(!V.half)return '';
+  const x='<span class="hs-x" data-a="close">×</span>';
+  if(V.half==='deposit'){
+    const ok='<button class="hs-ok" data-a="dep-ok">演示：模拟到账，返回游戏</button>';
+    return G.end==='app'?`<div class="hs full"><div class="hs-d"></div>${x}${ok}</div>`:`<div class="hm"></div><div class="hs"><div class="hs-d"></div>${x}${ok}</div>`;
+  }
+  const top=`<div class="hs-h">${pct(A.rate)} Rebate${x}</div>`;
+  if(V.load)return `<div class="hm"></div><div class="hs">${top}<div class="hs-load"><i class="spin"></i></div></div>`;
+  let c='',cls='';
+  if(V.half==='join'&&V.tip)c=`<div class="hs-t">${V.tip}</div>`;
+  if(V.half==='claim'){cls=' anc'+(V.claimed?' cl':'');c=`<span class="hs-amt">${fmt(A.yest)}</span>`+(V.pop?`<div class="hs-p"><h4>Congratulations!</h4><p>You Received:</p><em>+ ${fmt(A.yest)}</em><button data-a="pop-ok">Confirm</button></div>`:'');}
+  if(V.half==='kyc'){cls=' anc';c=`<span class="hs-amt">${fmt(A.yest)}</span><div class="hs-p"><h4>KYC Verification Required</h4><p>Please complete your KYC verification to access this promotion.</p><button data-a="kyc-go">Go</button></div>`;}
+  return `<div class="hm"></div><div class="hs">${top}<div class="hs-b${cls}">${c}</div></div>`;
+}
+function draw(){
+  const m=model(),app=G.end==='app';let h='';
+  if(V.view==='preview')h=`<div class="rbt in" data-a="open"><img src="assets/robot.webp" alt=""><span class="pill${app?' app':''}">${pillText(m)}</span></div>`;
+  if(V.view==='dock'){
+    h=`<div class="dock" data-a="open"><img src="assets/robot-peek.webp" alt=""></div>`;
+    if(V.say)h+=`<div class="say" data-a="open">${sayHtml(V.say,m)}</div>`;
+  }
+  if(V.view==='panel')h=`<div class="mask${app?' d54':''}" data-a="fold"></div><div class="rbt open"><img src="assets/robot.webp" alt=""></div><div class="pn${app?' app':''}">${panel(m)}</div>`;
+  document.getElementById('ph').innerHTML=h+half();
+  drawNow(m);drawCtl();
+}
+function drawNow(m){
+  const app=G.end==='app';
+  const nm=G.game!=='act'?'非活动游戏':G.phase==='ended'?(m.grace?'活动结束次日 · 昨日待领':'活动结束次日 · 没有待领'):({deposit:'活动游戏 · 需存款才能报名',join:'活动游戏 · 未报名',zero:'已报名 · 今日 0 投注',lock:'已报名 · 未达门槛',open:'已报名 · 已达门槛',cap:'已报名 · 已封顶'})[m.lv];
+  document.getElementById('nowt').textContent=nm+(G.yest&&m.hit?' · 昨日待领':'');
+  const list=sayList(m);
+  const say=list.length?`<span class="tag">开口</span> ${sayTxt(list[0],m)}`:'不开口，不打扰游戏';
+  const pan=!m.hit&&!m.grace?(app?'菜单不变，只有三个按钮':'Rebate 行保持 VIP 比例'):m.grace?(app?'三个按钮 + Claim 条':'Rebate 行回到 VIP 比例，加 Claim 条'):!m.joined?(G.user==='deposit'?'活动比例 + Deposit to Join':'活动比例 + Join Now'):(m.lv==='lock'||m.lv==='zero')?'比例、今日投注、今日返水上锁，提示还差多少':m.lv==='cap'?'比例、今日投注、今日返水加 MAX':'比例、今日投注、今日返水';
+  const act=!m.hit&&!m.grace?'没有新增动作':m.grace||G.yest?(G.kyc?'点 Claim：打开活动半屏，定位到昨日返水并自动领取':'点 Claim：半屏里弹 KYC 提示，点 Go 走现有流程'):!m.joined?(G.user==='deposit'?(app?'点 Deposit to Join：打开原生充值页，到账后变 Join Now':'点 Deposit to Join：打开厅内充值，到账后变 Join Now'):'点 Join Now：打开活动半屏并自动报名'):'没有按钮，返水块不可点';
+  document.getElementById('nowb').innerHTML=[['气泡',pillText(m)+(app?'（App 胶囊）':'')],['吸边',say],['面板',pan],['动作',act]].map(([k,v])=>`<div class="row"><b>${k}</b><span>${v}</span></div>`).join('');
+}
+const SC=[
+ ['join','未报名',{user:'join'}],['dep','需存款才能报名',{user:'deposit'}],
+ ['zero','已报名 · 0 投注',{}],['near','快到门槛 ₱350',{bet:350}],
+ ['open','已达门槛',{bet:2350}],['cap','已封顶',{bet:15000}],
+ ['claim','昨日待领 ₱120',{bet:2350,yest:A.yest}],['kyc','昨日待领 · 未 KYC',{bet:2350,yest:A.yest,kyc:0}],
+ ['ended','活动结束次日',{phase:'ended',yest:A.yest}],['vip','非活动游戏',{game:'vip'}]
+];
+const CT=[
+ ['端','end',[['H5','h5'],['App','app']]],
+ ['玩家','user',[['已报名','joined'],['未报名','join'],['需存款','deposit']]],
+ ['今日投注','bet',[['₱0',0],['₱350',350],['₱2,350',2350],['₱15,000',15000]]],
+ ['昨日待领','yest',[['无',0],['₱120',A.yest]]],
+ ['KYC','kyc',[['已通过',1],['未通过',0]]],
+ ['活动配了几款游戏','many',[['1 款',0],['8 款',1]]],
+ ['挂件推荐游戏（H5）','list',[['有',1],['无',0]]],
+ ['当前游戏','game',[['活动游戏','act'],['非活动游戏','vip']]],
+ ['活动状态','phase',[['进行中','live'],['结束次日','ended']]],
+ ['挂件','view',[['进厅','preview'],['吸边','dock'],['展开','panel']]]
+];
+const NUM=['bet','yest','kyc','many','list'];
+document.getElementById('sc').innerHTML=SC.map(([id,t])=>`<button data-sc="${id}">${t}</button>`).join('');
+document.getElementById('ctl').innerHTML=CT.map(([l,k,o])=>`<div class="cg"><label>${l}</label><div class="seg" data-k="${k}">${o.map(([t,v])=>`<button data-val="${v}">${t}</button>`).join('')}</div></div>`).join('');
+function drawCtl(){
+  document.querySelectorAll('#sc button').forEach(b=>b.classList.toggle('on',b.dataset.sc===scId));
+  document.querySelectorAll('#ctl .seg').forEach(s=>{
+    const k=s.dataset.k,cur=k==='view'?V.view:G[k];
+    s.querySelectorAll('button').forEach(b=>b.classList.toggle('on',(NUM.includes(k)?+b.dataset.val:b.dataset.val)===cur));
+    if(k==='list')s.classList.toggle('off',G.end==='app');
+  });
+  document.getElementById('betnow').textContent='当前 '+fmt(G.bet);
+}
+function stop(){[tPre,tSay,tAct,tTip].forEach(clearTimeout)}
+function reset(){stop();Object.assign(V,{half:null,say:null,said:{},pop:false,claimed:false,load:false,tip:''})}
+function enter(){reset();V.view='preview';draw();tPre=setTimeout(dock,3500)}
+function dock(){V.view='dock';draw();setTimeout(trySay,250)}
+function trySay(){
+  if(V.view!=='dock'||V.half||V.say)return;
+  const m=model(),t=sayList(m).find(x=>!V.said[x]);if(!t)return;
+  V.say=t;V.said[t]=1;draw();
+  clearTimeout(tSay);tSay=setTimeout(()=>{V.say=null;draw()},3000);
+}
+function phoneToast(t){const p=document.getElementById('ph'),e=document.createElement('div');e.className='toast';e.textContent=t;p.appendChild(e);setTimeout(()=>e.remove(),1900)}
+document.getElementById('sc').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  const s=SC.find(x=>x[0]===b.dataset.sc);scId=s[0];
+  G={...S0,end:G.end,many:G.many,list:G.list,...s[2]};enter();
+  if(innerWidth<=780)document.getElementById('box').scrollIntoView({behavior:'smooth',block:'start'});
+});
+document.getElementById('ctl').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  const k=b.parentElement.dataset.k;if(!k)return;
+  const n=NUM.includes(k)?+b.dataset.val:b.dataset.val;scId='';
+  if(k==='view'){reset();if(n==='preview')return enter();V.view=n;draw();if(n==='dock')setTimeout(trySay,250);return}
+  G[k]=n;
+  if(k==='user'&&n!=='joined')G.yest=0;
+  if(k==='yest'&&n>0)G.user='joined';
+  if(k==='end')return enter();
+  V.say=null;V.said={};draw();if(V.view==='dock')setTimeout(trySay,250);
+});
+document.getElementById('bet').addEventListener('click',()=>{G.bet=Math.min(G.bet+100,60000);scId='';draw();if(V.view==='dock')trySay()});
+document.getElementById('replay').addEventListener('click',enter);
+document.getElementById('ph').addEventListener('click',e=>{
+  const t=e.target.closest('[data-a]');if(!t)return;const a=t.dataset.a;
+  if(a==='open'){clearTimeout(tPre);clearTimeout(tSay);V.say=null;V.view='panel';return draw()}
+  if(a==='fold'){V.view='dock';draw();return setTimeout(trySay,250)}
+  if(a==='join'){V.half='join';V.load=true;draw();tAct=setTimeout(()=>{V.load=false;G.user='joined';V.tip='Registration Successful!';draw();tTip=setTimeout(()=>{V.tip='';draw()},1900)},700);return}
+  if(a==='deposit'){V.half='deposit';return draw()}
+  if(a==='dep-ok'){G.user='join';V.half=null;V.view='panel';draw();return phoneToast('演示：已到账，按钮变 Join Now')}
+  if(a==='claim'){
+    V.half=G.kyc?'claim':'kyc';V.load=true;draw();
+    tAct=setTimeout(()=>{V.load=false;draw();if(G.kyc)tTip=setTimeout(()=>{V.pop=true;G.yest=0;draw()},1000)},500);return;
+  }
+  if(a==='pop-ok'){V.pop=false;V.claimed=true;return draw()}
+  if(a==='kyc-go')return phoneToast('演示到此结束，后面走现有 KYC 流程');
+  if(a==='close'){stop();Object.assign(V,{half:null,pop:false,claimed:false,load:false,tip:'',view:'panel'});return draw()}
+});
+function fit(){
+  const w=document.documentElement.clientWidth,k=Math.min(1,(w-24)/390);
+  document.getElementById('box').style.zoom=k<1?k:'';
+  if(w<=780)document.getElementById('dt').removeAttribute('open');
+}
+addEventListener('resize',fit);fit();enter();
+</script>
+</body>
+</html>
