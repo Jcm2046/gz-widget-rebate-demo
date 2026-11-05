@@ -237,7 +237,7 @@ details[open] summary{margin-bottom:8px}
 <script>
 const A={rate:.015,thr:500,cap:200,vip:.0008,games:8,yest:120};
 const S0={user:'joined',bet:0,yest:0,kyc:1,game:'act',phase:'live'};
-let G={...S0,end:'h5',many:0,list:1,bet:350};
+let G={...S0,end:'h5',many:0,list:1,bet:400};
 const V={view:'preview',half:null,say:null,said:{},pop:false,claimed:false,load:false,tip:''};
 let scId='near',tPre,tSay,tAct,tTip;
 
@@ -284,7 +284,7 @@ function sayList(m){
   if(G.game!=='act')return a;
   if(G.yest&&(m.hit||m.grace))a.push('claim');
   if(m.hit&&!m.joined)a.push(G.user);
-  if(m.hit&&m.lv==='lock'&&G.bet>=A.thr*.7)a.push('near');
+  if(m.hit&&m.lv==='lock'&&G.bet>=A.thr*.8)a.push('near');
   return a;
 }
 function sayHtml(t,m){
@@ -333,7 +333,7 @@ function drawNow(m){
 }
 const SC=[
  ['join','未报名',{user:'join'}],['dep','需存款才能报名',{user:'deposit'}],
- ['zero','已报名 · 0 投注',{}],['near','快到门槛 ₱350',{bet:350}],
+ ['zero','已报名 · 0 投注',{}],['near','快到门槛 ₱400',{bet:400}],
  ['open','已达门槛',{bet:2350}],['cap','已封顶',{bet:15000}],
  ['claim','昨日待领 ₱120',{bet:2350,yest:A.yest}],['kyc','昨日待领 · 未 KYC',{bet:2350,yest:A.yest,kyc:0}],
  ['ended','活动结束次日',{phase:'ended',yest:A.yest}],['vip','非活动游戏',{game:'vip'}]
@@ -341,7 +341,7 @@ const SC=[
 const CT=[
  ['端','end',[['H5','h5'],['App','app']]],
  ['玩家','user',[['已报名','joined'],['未报名','join'],['需存款','deposit']]],
- ['今日投注','bet',[['₱0',0],['₱350',350],['₱2,350',2350],['₱15,000',15000]]],
+ ['今日投注','bet',[['₱0',0],['₱400',400],['₱2,350',2350],['₱15,000',15000]]],
  ['昨日待领','yest',[['无',0],['₱120',A.yest]]],
  ['KYC','kyc',[['已通过',1],['未通过',0]]],
  ['活动配了几款游戏','many',[['1 款',0],['8 款',1]]],
