@@ -246,7 +246,7 @@ const fmt=n=>'₱'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFrac
 const pct=r=>parseFloat((r*100).toFixed(2))+'%';
 function model(){
   const raw=r2(G.bet*A.rate),capped=raw>=A.cap,reb=Math.min(raw,A.cap),gap=Math.max(A.thr-G.bet,0),joined=G.user==='joined';
-  return{reb,gap,joined,lv:!joined?G.user:capped?'cap':gap>0?(G.bet>0?'lock':'zero'):'open',
+  return{reb,gap,joined,lv:!joined?G.user:gap>0?(G.bet>0?'lock':'zero'):capped?'cap':'open',
     hit:G.game==='act'&&G.phase==='live',grace:G.game==='act'&&G.phase==='ended'&&G.yest>0};
 }
 const COIN='<svg class="coin" viewBox="0 0 24 24"><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE9A8"/><stop offset="1" stop-color="#F5A623"/></linearGradient></defs><circle cx="12" cy="12" r="11" fill="url(#cg)" stroke="#B9770E" stroke-width="1"/><circle cx="12" cy="12" r="8" fill="none" stroke="#C98A16" stroke-width="1"/><text x="12" y="16.4" text-anchor="middle" font-size="12" font-weight="800" fill="#7A4B05" font-family="Arial">₱</text></svg>';
