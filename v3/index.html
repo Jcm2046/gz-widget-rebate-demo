@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>厅内返水 · 第三轮方向</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%}
+body{font:14px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Helvetica Neue",Arial,sans-serif;color:#1c2330;background:#f4f5f7}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:#2c54b8}
+.wrap{max-width:1400px;margin:0 auto;padding:28px 28px 80px}
+.hd h1{font-size:26px;line-height:1.3;font-weight:700}
+.hd .sub{margin-top:2px;font-size:17px;line-height:1.4;font-weight:600;color:#b4231f}
+.hd ul{margin-top:10px;padding-left:18px;color:#3d4653}
+.hd li{margin:3px 0}
+.hd .eg{margin-top:6px;font-size:13px;color:#6b7482}
+.ctrl{position:sticky;top:0;z-index:200;display:flex;flex-wrap:wrap;align-items:center;gap:8px 32px;margin:16px -28px 0;padding:10px 28px;background:rgba(244,245,247,.96);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid #e4e6ea}
+.cg{display:flex;align-items:center;gap:8px;min-width:0}
+.cg>label{font-size:13px;font-weight:600;color:#39424f;white-space:nowrap}
+.cg>small{font-size:12px;color:#8a93a1;white-space:nowrap}
+.seg{display:inline-flex;flex:none;background:#e3e6ea;border-radius:8px;padding:2px}
+.seg button{padding:4px 11px;border-radius:6px;font-size:13px;color:#3a4350;white-space:nowrap}
+.seg button.on{background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.16);font-weight:600;color:#111827}
+.pl{margin-top:44px;scroll-margin-top:64px}
+.pl-h{display:flex;align-items:center;gap:10px}
+.no{flex:none;width:28px;height:28px;border-radius:8px;background:#1f2937;color:#fff;font-size:15px;line-height:28px;font-weight:700;text-align:center}
+.pl-h h2{font-size:20px;line-height:28px;font-weight:700}
+.pl-h h2 em{margin-left:4px;font-style:normal;font-size:15px;font-weight:500;color:#6b7482}
+.idea{margin-top:6px;font-size:14.5px;color:#3d4653}
+.tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.tag{flex:1 1 240px;min-width:0;padding:7px 12px;border-radius:10px;background:#fff;border:1px solid #e4e6ea}
+.tag label{display:block;font-size:12px;line-height:18px;color:#8a93a1}
+.tag span{display:block;font-size:13.5px;line-height:20px;font-weight:500;color:#1c2330}
+.row{display:flex;gap:16px;margin:12px -20px 0;padding:2px 20px 30px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+.pc{flex:none;width:calc(390px*var(--s));scroll-snap-align:start}
+.pc figcaption{display:flex;align-items:center;gap:6px;height:34px;font-size:13px;font-weight:600;color:#39424f;white-space:nowrap}
+.pc figcaption i{flex:none;width:20px;height:20px;border-radius:50%;background:#e3e6ea;font-style:normal;font-size:12px;line-height:20px;font-weight:700;text-align:center}
+.pb,.pb2{flex:none;height:28px;padding:0 12px;border-radius:8px;font-size:12.5px;line-height:28px;font-weight:600;white-space:nowrap}
+.pb{background:#1f2937;color:#fff}
+.pb.ing{background:#b4231f}
+.pb2{background:#e3e6ea;color:#1c2330}
+.pb-w{display:flex;gap:6px;margin-left:auto}
+.sec{margin-top:48px}
+.sec h2{margin-bottom:10px;font-size:19px;font-weight:700}
+.tw{overflow-x:auto;border:1px solid #e4e6ea;border-radius:12px;background:#fff}
+table.cmp{width:100%;min-width:760px;border-collapse:collapse;font-size:13px}
+table.cmp th{background:#f0f1f4;text-align:left;font-weight:600;padding:8px 10px;white-space:nowrap}
+table.cmp td{padding:8px 10px;border-top:1px solid #edeff2;vertical-align:top}
+table.cmp td:first-child{font-weight:600;white-space:nowrap}
+.box{padding:14px 18px;border:1px solid #e4e6ea;border-radius:12px;background:#fff}
+.box p{font-size:13.5px;color:#5b6472}
+.box ol{margin-top:4px;padding-left:18px;font-size:13.5px}
+.box li{margin:5px 0}
+@media(max-width:760px){
+.wrap{padding:20px 16px 60px}
+.hd h1{font-size:23px}
+.hd .sub{font-size:16px}
+.ctrl{gap:6px 20px;margin:14px -16px 0;padding:8px 16px}
+.cg{width:100%;justify-content:space-between}
+.cg>small{display:none}
+.cg>label{font-size:12.5px}
+.seg button{padding:4px 8px;font-size:12.5px}
+.pl{margin-top:34px}
+.row{margin:12px -16px 0;padding:2px 16px 26px;scroll-padding-left:16px}
+}
+
+
+:root{--s:.83;--g:#EAC070;--gg:linear-gradient(90deg,#EAC070,#F4D38F);--m:#2F3542;--i:#242933;--tt:#383F4D;--t2:#DCE3EC;--t3:#B7BEC7;--t4:#8F98A6;--ln:rgba(255,255,255,.1)}
+.pw{position:relative;width:calc(390px*var(--s));height:calc(844px*var(--s));border-radius:calc(16px*var(--s));box-shadow:0 6px 16px rgba(16,24,40,.2)}
+.phone{position:absolute;left:0;top:0;width:390px;height:844px;overflow:hidden;border-radius:16px;background:#000;color:#fff;font-family:Inter,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;font-size:14px;line-height:1.4;transform:scale(var(--s));transform-origin:0 0;user-select:none;-webkit-user-select:none}
+.phone img{display:block}
+.vp{position:absolute;left:0;top:87px;width:390px;height:679px;overflow:hidden;background:#0b0e14 url(assets/game-superace.jpg) 0 -40px/390px auto no-repeat}
+.sf{position:absolute;left:0;width:390px;z-index:20;pointer-events:none}
+.sf.t{top:0;height:87px}
+.sf.b{bottom:0;height:78px}
+.rbt{position:absolute;right:16px;top:125px;width:59px;height:76px;z-index:7}
+.rbt>img{width:59px;height:76px}
+.pill{position:absolute;left:50%;bottom:-11px;transform:translateX(-50%);height:26px;padding:0 9px;white-space:nowrap;font-size:11px;font-weight:600;line-height:26px;color:#fff;background:url(assets/pill-bg.png) center/100% 100% no-repeat}
+.dock{position:absolute;right:0;top:139px;width:30px;height:40px;z-index:6}
+.dock>img{width:30px;height:40px}
+
+
+.nb{position:absolute;z-index:9;left:12px;right:12px;top:10px;height:56px;display:flex;align-items:center;gap:8px;padding:8px 10px 8px 12px;border-radius:12px;background:linear-gradient(90deg,#DE4444,#F95858);box-shadow:0 6px 16px rgba(0,0,0,.35);color:#fff;text-align:left}
+.ni{position:relative;flex:none;width:40px;height:40px;display:flex;align-items:center;justify-content:center}
+.ni>img{width:40px;height:40px}
+.nb .tt{flex:1;min-width:0}
+.nb h5{font-size:14px;line-height:22px;font-weight:500;white-space:nowrap}
+.nb p{font-size:12px;line-height:18px;white-space:nowrap}
+.nb .x{flex:none;width:24px;height:24px}
+.ni.fc{overflow:hidden;border-radius:50%;background:#FFE9C2 url(assets/robot.webp) -14px -5px/68px auto no-repeat;box-shadow:0 0 0 1.5px rgba(255,255,255,.75)}
+.ni .mc1{position:absolute;width:23px;height:23px}
+.msc{position:relative;display:block;width:38px;height:28px;border-radius:5px;background:linear-gradient(135deg,#F7DE9B,#D9A347);box-shadow:0 1px 3px rgba(0,0,0,.35)}
+.msc:after{content:"";position:absolute;left:4px;right:4px;top:5px;bottom:5px;border-radius:3px;background:linear-gradient(120deg,#E4E7EB 0,#AEB4BE 45%,#DDE0E5 60%,#A2A9B4 100%)}
+
+
+.bb{position:absolute;z-index:9;right:34px;top:138px;height:42px;display:flex;align-items:center;gap:6px;padding:0 12px 0 7px;border-radius:21px 10px 10px 21px;background:var(--m);box-shadow:0 0 0 1px rgba(234,192,112,.55),0 4px 12px rgba(0,0,0,.5);color:var(--t2);font-size:12.5px;line-height:16px;white-space:nowrap}
+.bb:after{content:"";position:absolute;right:-5px;top:15px;width:10px;height:10px;background:var(--m);transform:rotate(45deg);box-shadow:1px -1px 0 rgba(234,192,112,.55)}
+.bb img{width:28px;height:28px}
+.bb b{color:var(--g);font-weight:700}
+.bb.sp{height:52px;padding:0 16px;border-radius:18px;top:133px;font-size:14px;line-height:20px;font-weight:500;color:#fff}
+.bb.sp:after{top:20px}
+
+
+.hm{position:absolute;inset:0;z-index:10;background:rgba(0,0,0,.65)}
+.dr{position:absolute;left:0;right:0;bottom:0;z-index:11;max-height:543px;display:flex;flex-direction:column;border-radius:16px 16px 0 0;background:var(--m);overflow:hidden;color:#fff}
+.dh{position:relative;flex:none;height:56px;display:flex;align-items:center;justify-content:center;font-size:16px;line-height:24px;font-weight:600}
+.dx{position:absolute;right:16px;top:16px;width:24px;height:24px}
+.dr-b{flex:1;min-height:0;overflow:hidden;padding-bottom:22px}
+.max{display:inline-block;flex:none;height:14px;padding:0 3px;border-radius:3px;background:linear-gradient(180deg,#FFE08A,#F5A623);color:#3A2300;font-size:9px;line-height:14px;font-weight:900;letter-spacing:.2px}
+.lk{display:block;flex:none}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 16px 0}
+.two>div{min-width:0;padding:11px 12px;border-radius:12px;background:var(--i)}
+.two span{display:block;font-size:12.5px;line-height:17px;color:var(--t3)}
+.two b{display:flex;align-items:center;gap:4px;margin-top:3px;font-size:19px;line-height:25px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.two b i{font-style:normal}
+.two b.dim{color:var(--t3)}
+.two b.gd{color:var(--g)}
+.two .max,.tk-l .max,.sc-u .max{display:inline-block;height:14px;margin:0;font-size:9px;line-height:14px;font-weight:900;color:#3A2300}
+.tk-l .max,.sc-u .max{height:16px;padding:0 4px;background:#3A2300;color:#FFE08A;font-size:10px;line-height:16px}
+.hn{margin:12px 16px 0;text-align:center;font-size:13.5px;line-height:20px;color:var(--t2)}
+.hn b{color:var(--g);font-weight:700}
+.hn.ok{color:#F4D38F;font-weight:600}
+.cap{position:relative;display:inline-block;height:24px;padding:0 12px;border-radius:100px;background:var(--tt);font-size:12px;line-height:24px;color:var(--t2);white-space:nowrap}
+.cap:after{content:"";position:absolute;left:50%;top:-3px;width:8px;height:8px;margin-left:-4px;background:inherit;transform:rotate(45deg)}
+.cap b{color:var(--g);font-weight:700}
+.cap.ok{background:#4A3B1E;color:#F4D38F;font-weight:600}
+
+
+.mt{margin:0 16px;text-align:center}
+.mt-l{margin-bottom:8px;font-size:14px;line-height:20px;font-weight:600;color:var(--t2)}
+.mt-d{position:relative;display:flex;align-items:center;justify-content:center;gap:4px;height:86px;border-radius:14px;background:linear-gradient(180deg,#0C0E13,#171A21);box-shadow:inset 0 2px 8px rgba(0,0,0,.8),inset 0 0 0 1px rgba(255,255,255,.08),0 1px 0 rgba(255,255,255,.06)}
+.mt-k{display:block;margin-right:6px}
+.mc{width:24px;font-size:30px;line-height:58px;font-weight:700;color:#5B6270;text-align:center}
+.md{width:12px;font-size:34px;line-height:58px;font-weight:700;color:#5B6270;text-align:center}
+.dg{position:relative;flex:none;width:38px;height:58px;border-radius:7px;overflow:hidden;background:linear-gradient(180deg,#262B35 0,#1C2028 49.5%,#0B0D11 49.6%,#0B0D11 50.5%,#14171D 50.6%,#1B1F27 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.05),0 1px 2px rgba(0,0,0,.7);font-size:37px;line-height:58px;font-weight:700;text-align:center;color:#5B6270;font-variant-numeric:tabular-nums}
+.dg b{position:absolute;left:0;right:0;top:0;font-weight:inherit}
+.dg.z{color:#3A404C}
+.mt.on .mc,.mt.on .md,.mt.on .dg{color:#FFD97A;text-shadow:0 0 10px rgba(255,186,62,.8),0 0 2px rgba(255,226,150,.9)}
+.mt.on .dg.z{color:#6A5A33;text-shadow:none}
+.dg b.in{animation:dgin .15s ease-out}
+.dg b.out{animation:dgout .15s ease-in forwards}
+@keyframes dgin{from{transform:translateY(100%)}to{transform:none}}
+@keyframes dgout{to{transform:translateY(-100%)}}
+.fx .mc,.fx .md,.fx .dg{animation:mtlit .36s both;animation-delay:calc(var(--i)*.11s)}
+@keyframes mtlit{0%{color:#5B6270;text-shadow:none}55%{color:#FFF6D8;text-shadow:0 0 16px #FFC94D,0 0 34px #FF9E1F}}
+.mt-x{position:absolute;right:8px;top:8px}
+.mt-c{margin-top:9px}
+.mt-r{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding:10px 12px;border-radius:12px;background:var(--i);font-size:13.5px;color:var(--t3)}
+.mt-r b{font-size:19px;line-height:25px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
+.mt-n{margin-top:9px;font-size:12.5px;line-height:17px;color:var(--t3)}
+.pf{position:absolute;right:14px;top:-10px;font-size:15px;font-weight:800;color:#FFE08A;text-shadow:0 1px 3px rgba(0,0,0,.8);animation:pf .8s ease-out forwards;pointer-events:none}
+@keyframes pf{0%{opacity:0;transform:translateY(14px)}25%{opacity:1}100%{opacity:0;transform:translateY(-12px)}}
+
+
+.ne{position:relative;display:flex;align-items:center;justify-content:center;height:136px;margin:0 16px;border-radius:14px;overflow:hidden;background:#13151B;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.ne:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.045) 0 1px,transparent 1px 22px),repeating-linear-gradient(90deg,rgba(255,255,255,.03) 0 1px,transparent 1px 46px)}
+.ne:after{content:"";position:absolute;inset:0;opacity:0;background:radial-gradient(70% 90% at 50% 50%,rgba(255,160,40,.34),transparent 72%)}
+.ne.on:after{opacity:1}
+.ne-t{position:relative;z-index:1;font-family:"Arial Rounded MT Bold","SF Pro Rounded",ui-rounded,Inter,-apple-system,BlinkMacSystemFont,Arial,sans-serif;font-size:46px;line-height:60px;font-weight:700;letter-spacing:.5px;white-space:nowrap;color:rgba(255,255,255,.03);-webkit-text-stroke:2px #5B6270}
+.ne.on .ne-t{color:rgba(255,226,150,.14);-webkit-text-stroke:2px #FFF3CE;text-shadow:0 0 5px #FFD66B,0 0 12px #FFB627,0 0 26px #FF8A00,0 0 48px rgba(255,138,0,.65)}
+.fx .ne-t{animation:neflk 1.15s steps(1,end) both}
+.fx .ne:after{animation:negl 1.15s steps(1,end) both}
+@keyframes neflk{0%,14%,34%,54%{-webkit-text-stroke-color:#5B6270;text-shadow:none;color:rgba(255,255,255,.03)}8%,24%,44%,70%,100%{-webkit-text-stroke-color:#FFF3CE;text-shadow:0 0 5px #FFD66B,0 0 12px #FFB627,0 0 26px #FF8A00,0 0 48px rgba(255,138,0,.65);color:rgba(255,226,150,.14)}}
+@keyframes negl{0%,14%,34%,54%{opacity:0}8%,24%,44%,70%,100%{opacity:1}}
+.ne-lp{position:relative;display:block;width:24px;height:24px;margin:2px 0 0 8px}
+
+
+.tk{position:relative;height:132px;margin:0 16px}
+.tk-f,.tk-s{position:absolute;left:0;top:0;width:358px;height:132px}
+.tk-l{position:absolute;left:30px;top:0;bottom:0;width:216px;display:flex;flex-direction:column;justify-content:center;color:#6A4A12}
+.tk-l span{font-size:13px;line-height:18px;font-weight:600}
+.tk-l b{display:flex;align-items:center;gap:6px;margin:2px 0;font-size:32px;line-height:42px;font-weight:800;color:#3A2300;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tk-l b img{width:30px;height:30px}
+.tk-l b i{font-style:normal}
+.tk-l small{font-size:12.5px;line-height:18px;font-weight:500}
+.tk-l small i{font-style:normal;font-weight:700;font-variant-numeric:tabular-nums}
+.tk-r{position:absolute;right:0;top:0;bottom:0;width:102px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#6A4A12}
+.tk-r.on{justify-content:space-between;padding:13px 0 11px}
+.tk-r em{font-style:normal;font-size:12px;line-height:18px;font-weight:800;letter-spacing:2px}
+.tk-r strong{font-size:17px;line-height:24px;font-weight:800;color:#3A2300}
+.tk-r small{margin-top:6px;font-size:12px;line-height:16px;font-weight:500;color:var(--t3);white-space:nowrap}
+.tk-r small b{color:var(--t2);font-weight:700;font-variant-numeric:tabular-nums}
+.tk.off .tk-l{color:var(--t3)}
+.tk.off .tk-l b{color:var(--t2)}
+.tk.off .tk-l b img{filter:grayscale(1) brightness(.72)}
+.tk-st{position:absolute;right:16px;top:33px;width:68px;height:68px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:2.5px solid #C8102E;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,0),inset 0 0 0 3px #C8102E;color:#C8102E;font-size:12.5px;line-height:16px;font-weight:900;letter-spacing:.3px;transform:rotate(-16deg);opacity:.92;mix-blend-mode:multiply}
+.fx .tk-st{animation:stamp .4s cubic-bezier(.3,.8,.4,1) .15s both}
+@keyframes stamp{0%{opacity:0;transform:rotate(-16deg) scale(3.4)}75%{opacity:1;transform:rotate(-16deg) scale(.9)}100%{opacity:.9;transform:rotate(-16deg) scale(1)}}
+.fx .tk-f{animation:tkon .3s linear .42s both}
+@keyframes tkon{from{filter:grayscale(1) brightness(.5)}to{filter:none}}
+.fx.dr .tk{animation:tkshk .34s ease-out .5s}
+@keyframes tkshk{0%,100%{transform:none}20%{transform:translate(-3px,1px) rotate(-.7deg)}45%{transform:translate(3px,-1px) rotate(.6deg)}70%{transform:translate(-2px,0)}}
+
+
+.sl{margin:0 16px}
+.sl-m{position:relative;z-index:2;height:14px;border-radius:7px;background:linear-gradient(180deg,#0B0D11,#20242D);box-shadow:inset 0 2px 3px rgba(0,0,0,.9),0 1px 0 rgba(255,255,255,.08)}
+.sl-w{position:relative;margin:-7px 14px 0;overflow:hidden}
+.sl-p{position:relative;padding:20px 16px 8px;background:#FBF7EB;color:#2B2A27;font-family:"SF Mono",ui-monospace,Menlo,Consolas,"Roboto Mono",monospace;box-shadow:inset 0 10px 10px -8px rgba(0,0,0,.28)}
+.sl-p h6{margin-bottom:10px;font-size:13.5px;line-height:18px;font-weight:700;letter-spacing:.8px;text-align:center}
+.sl-r{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13.5px;line-height:24px;white-space:nowrap}
+.sl-r b{display:flex;align-items:center;gap:4px;font-weight:600;font-variant-numeric:tabular-nums}
+.sl-r b i{font-style:normal}
+.sl-hr{height:0;margin:8px 0;border-top:1.5px dashed #A9A392}
+.sl-t{font-size:15px;line-height:26px;font-weight:700;color:#9A958A}
+.sl-t b{font-size:17px;font-weight:700}
+.sl.on .sl-t{color:#C8102E}
+.sl.on .sl-t b{font-size:19px;font-weight:800}
+.sl-bc{height:20px;margin:10px 0 2px;background:repeating-linear-gradient(90deg,#2B2A27 0 2px,transparent 2px 3px,#2B2A27 3px 4px,transparent 4px 7px,#2B2A27 7px 10px,transparent 10px 12px);opacity:.75}
+.sl-z{height:7px;background:linear-gradient(135deg,#FBF7EB 50%,transparent 50%) 0 -7px/14px 14px repeat-x,linear-gradient(-135deg,#FBF7EB 50%,transparent 50%) 0 -7px/14px 14px repeat-x}
+.fx .sl-p,.fx .sl-z{animation:slfeed .72s steps(8,end) both}
+@keyframes slfeed{from{transform:translateY(-44px)}to{transform:none}}
+.fx .sl-t{animation:sllit .5s ease-out .72s both}
+@keyframes sllit{0%{color:#9A958A;background:rgba(200,16,46,0)}35%{background:rgba(200,16,46,.16)}100%{background:rgba(200,16,46,0)}}
+
+
+.two.tw0{margin-top:0}
+.wi{margin:12px 16px 0;padding:12px;border-radius:12px;background:var(--i)}
+.wi h6{font-size:13.5px;line-height:20px;font-weight:600;color:var(--t2)}
+.wi-t{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.wi-t button{position:relative;height:44px;padding:0 2px;border-radius:10px;background:var(--tt);box-shadow:inset 0 0 0 1px var(--ln);color:#fff;font:inherit;font-size:13.5px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wi-t button.on{background:rgba(234,192,112,.15);box-shadow:inset 0 0 0 1.5px var(--g);color:#F4D38F}
+.wi-t em{position:absolute;right:-2px;top:-8px;height:16px;padding:0 6px;border-radius:8px 8px 8px 2px;background:linear-gradient(90deg,#DE4444,#F95858);font-style:normal;font-size:10px;line-height:16px;font-weight:700;color:#fff;transition:opacity .28s,transform .28s}
+.wi-t em.out{opacity:0;transform:scale(.6)}
+.fx .wi-t button{animation:witr .32s ease-out both}
+.fx .wi-t button:nth-child(2){animation-delay:.07s}
+.fx .wi-t button:nth-child(3){animation-delay:.14s}
+@keyframes witr{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.wi-r{display:flex;align-items:center;gap:6px;margin-top:12px;font-size:14px;line-height:22px;color:var(--t2);white-space:nowrap}
+.wi-r img{flex:none;width:24px;height:24px}
+.wi-r b{font-size:18px;font-weight:700;color:var(--g);font-variant-numeric:tabular-nums}
+
+
+.rs{position:relative;display:flex;align-items:flex-end;gap:12px;margin:2px 16px 0}
+.rs-r{flex:none;width:102px;height:132px;margin-left:-6px;object-fit:contain}
+.rs-b{position:relative;flex:1;min-width:0;margin-bottom:12px;padding:14px 16px;border-radius:18px;background:var(--i);box-shadow:inset 0 0 0 1px rgba(234,192,112,.35);font-size:20px;line-height:27px;font-weight:600}
+.rs-b:before{content:"";position:absolute;left:-7px;bottom:30px;width:14px;height:14px;background:var(--i);transform:rotate(45deg);box-shadow:-1px 1px 0 rgba(234,192,112,.35)}
+.rs-b p+p{margin-top:6px}
+.rs-b b{color:var(--g);font-weight:800;font-variant-numeric:tabular-nums}
+.fx .rs-r{animation:rsjump .62s ease-out}
+.fx .rs-b{animation:rsswap .34s ease-out .18s both}
+@keyframes rsjump{0%,100%{transform:none}30%{transform:translateY(-26px) rotate(-3deg)}55%{transform:translateY(0)}72%{transform:translateY(-9px)}}
+@keyframes rsswap{from{opacity:0;transform:translateX(-10px) scale(.96)}to{opacity:1;transform:none}}
+
+
+.cp{position:relative;height:190px;margin:0 16px;border-radius:14px;overflow:hidden;background:radial-gradient(110% 95% at 50% 105%,#47391F 0,#23242B 58%,#191C23 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.cp-b{position:absolute;left:50%;bottom:6px;width:280px;height:26px;margin-left:-140px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.6),transparent)}
+.cp-p{position:absolute;left:50%;bottom:12px;width:0;height:0}
+.cn{position:absolute;width:46px;height:46px;margin-left:-23px;transform:rotate(var(--r));filter:drop-shadow(0 2px 2px rgba(0,0,0,.45))}
+.cn.dp{animation:cndp .46s cubic-bezier(.34,.7,.5,1) both}
+@keyframes cndp{0%{opacity:0;transform:translateY(-90px) rotate(var(--r))}60%{opacity:1;transform:translateY(0) rotate(var(--r))}80%{transform:translateY(-7px) rotate(var(--r))}100%{transform:rotate(var(--r))}}
+.fx .cn{animation:cnbn .5s ease-out .46s}
+@keyframes cnbn{0%,100%{transform:rotate(var(--r))}35%{transform:translateY(-16px) rotate(var(--r))}70%{transform:translateY(-4px) rotate(var(--r))}}
+.cp.lkd .cn{filter:brightness(.8) saturate(.8) drop-shadow(0 2px 2px rgba(0,0,0,.45))}
+.cp-g{position:absolute;left:50%;bottom:10px;width:196px;height:166px;margin-left:-98px;z-index:40}
+.cp-g u{position:absolute;left:0;right:0;top:0;bottom:9px;border-radius:98px 98px 8px 8px;background:linear-gradient(112deg,rgba(255,255,255,.2),rgba(255,255,255,.05) 38%,rgba(255,255,255,.03) 62%,rgba(255,255,255,.13));box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.34),inset 0 8px 18px rgba(255,255,255,.1)}
+.cp-g u:before{content:"";position:absolute;left:34px;top:30px;width:16px;height:66px;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(255,255,255,0));transform:rotate(24deg)}
+.cp-g s{position:absolute;left:-7px;right:-7px;bottom:0;height:11px;border-radius:4px;background:linear-gradient(180deg,#6B7382,#3A404D);box-shadow:0 2px 4px rgba(0,0,0,.5)}
+.cp-g em{position:absolute;left:50%;bottom:24px;width:36px;height:36px;margin-left:-18px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:linear-gradient(180deg,#F4D38F,#C8995A);box-shadow:0 2px 6px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.5)}
+.fx .cp-g{animation:cpup .78s cubic-bezier(.5,0,.8,.5) .1s both}
+@keyframes cpup{0%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-120px)}}
+.cp-c{margin-top:12px;text-align:center}
+.cp-c .cap:after{display:none}
+
+
+.sc{position:relative;height:136px;margin:0 16px;border-radius:14px;background:linear-gradient(120deg,#F7DE9B 0,#E3B45C 38%,#F8E2A6 58%,#D9A347 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.4),0 4px 14px rgba(0,0,0,.35)}
+.sc:before{content:"";position:absolute;inset:6px;border-radius:10px;border:1.5px dashed rgba(122,77,8,.5);pointer-events:none}
+.sc-u{position:absolute;left:16px;top:18px;width:326px;height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:9px;background:linear-gradient(180deg,#FDEFC8,#F2CC7C);box-shadow:inset 0 1px 4px rgba(122,77,8,.4);color:#6A4A12}
+.sc-u span{font-size:13px;line-height:18px;font-weight:600}
+.sc-u b{display:flex;align-items:center;gap:6px;font-size:32px;line-height:42px;font-weight:800;color:#3A2300;font-variant-numeric:tabular-nums}
+.sc-u b img{width:30px;height:30px}
+.sc-u b i{font-style:normal}
+.sc-cv{position:absolute;left:16px;top:18px;width:326px;height:100px;border-radius:9px;touch-action:none}
+.sc-cv.can{cursor:crosshair}
+.sc-b{display:flex;justify-content:space-between;align-items:center;margin:12px 16px 0;padding:10px 12px;border-radius:12px;background:var(--i);font-size:13.5px;color:var(--t3)}
+.sc-b b{font-size:19px;line-height:25px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
+.hide{visibility:hidden}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hd">
+    <h1>厅内返水 · 第三轮方向</h1>
+    <p class="sub">门槛是开关，返水是一直跳的表</p>
+    <ul>
+      <li>上一轮五个方案都把解锁当成终点。可是解锁之后还能一直投，投得越多返得越多，到每日上限才停，所以门槛不适合用进度来表达。</li>
+      <li>这一轮换个说法：投注一直往前走，返水跟着一直涨，门槛只是途中发生一次的开关。画面上不再有进度条、环、节点和完成度，差多少只写金额。</li>
+      <li>主角还是 Today's Bet 和 Today's Rebate。第 8 个方案解锁前隐藏金额，是有意的例外。</li>
+      <li>不变的部分：未报名和需存款的抽屉、提醒时机、Rebate 按钮和面板都沿用上一轮，在 <a href="../v2/">第二轮演示</a> 里可以看。</li>
+    </ul>
+    <p class="eg">示例数据：返水比例 1.5%，解锁门槛 ₱500，每日上限 ₱200。每个方案四台手机讲一个完整过程，第 3 台可以点 ▶ 播放，看数字穿过门槛后继续涨。</p>
+  </header>
+  <div class="ctrl" id="ctrl"></div>
+  <main id="list"></main>
+  <section class="sec">
+    <h2>横向对比</h2>
+    <div class="tw"><table class="cmp" id="cmp"></table></div>
+  </section>
+  <section class="sec">
+    <h2>小点子</h2>
+    <div class="box"><p>下面三条可以叠加到任一方案上，这里只写文字。</p><ol>
+      <li>Rebate 按钮标签直接显示今日金额，未解锁带锁。</li>
+      <li>解锁后机器人身上亮一个小灯，不开口也能看出返水已生效。</li>
+      <li>玩家点 Exit 时提醒今日返水金额，这个触点要过合规。</li>
+    </ol></div>
+  </section>
+</div>
+<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="tkg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FBE7B0"/><stop offset=".42" stop-color="#EEC87A"/><stop offset=".62" stop-color="#F8E2A6"/><stop offset="1" stop-color="#DDAA52"/></linearGradient></defs></svg>
+<script>
+const A={rate:.015,thr:500,cap:200};
+const G={low:300,high:2350};
+const r2=n=>Math.round(n*100)/100;
+const fmt=n=>'₱'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const pct=r=>parseFloat((r*100).toFixed(2))+'%';
+const RATE=pct(A.rate);
+const TMR=(()=>{const d=new Date();d.setDate(d.getDate()+1);return d.toLocaleDateString('en-US',{month:'short',day:'numeric'})})();
+function M(bet){
+  const raw=r2(bet*A.rate),gap=Math.max(A.thr-bet,0),locked=gap>0;
+  return{bet,gap,locked,reb:Math.min(raw,A.cap),cap:!locked&&raw>=A.cap,zero:bet===0};
+}
+const PX='M16.2926 6.29289C16.6832 5.90237 17.3163 5.90237 17.7069 6.29289C18.0974 6.68342 18.0974 7.31658 17.7069 7.70711L13.414 12L17.7069 16.2929C18.0974 16.6834 18.0974 17.3166 17.7069 17.7071C17.3163 18.0976 16.6832 18.0976 16.2926 17.7071L11.9998 13.4142L7.70686 17.7071C7.31634 18.0976 6.68317 18.0976 6.29265 17.7071C5.90212 17.3166 5.90212 16.6834 6.29265 16.2929L10.5855 12L6.29265 7.70711C5.90213 7.31658 5.90213 6.68342 6.29265 6.29289C6.68317 5.90237 7.31634 5.90237 7.70686 6.29289L11.9998 10.5858L16.2926 6.29289Z';
+const PL='M17 9V7C17 4.2 14.8 2 12 2C9.2 2 7 4.2 7 7V9C5.3 9 4 10.3 4 12V19C4 20.7 5.3 22 7 22H17C18.7 22 20 20.7 20 19V12C20 10.3 18.7 9 17 9ZM9 7C9 5.3 10.3 4 12 4C13.7 4 15 5.3 15 7V9H9V7ZM13.1 15.5L13 15.6V17C13 17.6 12.6 18 12 18C11.4 18 11 17.6 11 17V15.6C10.4 15 10.3 14.1 10.9 13.5C11.5 12.9 12.4 12.8 13 13.4C13.6 13.9 13.7 14.9 13.1 15.5Z';
+const ic=(p,s,c,k='')=>`<svg${k?` class="${k}"`:''} width="${s}" height="${s}" viewBox="0 0 24 24" fill="none"><path d="${p}" fill="${c}"/></svg>`;
+const COIN='<img src="assets/coin-c.png" alt="">';
+const TICKET='<img src="assets/ticket.png" alt="">';
+const ROBOT='assets/robot.webp';
+const LK=(s=16,c='#8F98A6')=>ic(PL,s,c,'lk');
+const MAX='<span class="max">MAX</span>';
+const GAP=m=>`<b data-f="gap">${fmt(m.gap)}</b>${m.zero?'':' more'}`;
+const OKT=m=>m.cap?'Daily cap reached.':'Claimable tomorrow.';
+const TWO=(m,k='')=>`<div class="two${k}"><div><span>Today's Bet</span><b data-f="bet">${fmt(m.bet)}</b></div><div><span>Today's Rebate</span><b class="${m.locked?'dim':'gd'}">${m.locked?LK():''}<i data-f="reb">${fmt(m.reb)}</i>${m.cap?MAX:''}</b></div></div>`;
+const HN=(m,t)=>`<p class="hn${m.locked?'':' ok'}">${m.locked?t:OKT(m)}</p>`;
+
+
+const zeroLead=(t,k)=>k<2&&!/[1-9]/.test(t.slice(0,k+1));
+function mtCells(m){
+  const t=m.reb.toFixed(2).padStart(6,'0').replace('.','');let i=0;
+  const cell=k=>`<span class="dg${zeroLead(t,k)?' z':''}" data-d="${t[k]}" style="--i:${++i}"><b>${t[k]}</b></span>`;
+  return `<span class="mc" style="--i:0">₱</span>${cell(0)}${cell(1)}${cell(2)}<span class="md" style="--i:${++i}">.</span>${cell(3)}${cell(4)}`;
+}
+function setDigit(c,d){
+  if(c.dataset.d===d)return;c.dataset.d=d;
+  const o=c.lastElementChild,n=document.createElement('b');
+  n.textContent=d;n.className='in';o.className='out';c.append(n);
+  setTimeout(()=>o.remove(),170);
+}
+function floatUp(vp,v){
+  const d=vp.querySelector('.mt-d');if(!d)return;
+  const e=document.createElement('span');e.className='pf';e.textContent='+'+fmt(v);d.append(e);
+  setTimeout(()=>e.remove(),820);
+}
+
+const TKP='M12 1H249A7 7 0 0 0 263 1H345A12 12 0 0 1 357 13V57A9 9 0 0 0 357 75V119A12 12 0 0 1 345 131H263A7 7 0 0 0 249 131H12A12 12 0 0 1 0 119V75A9 9 0 0 0 0 57V13A12 12 0 0 1 12 1Z';
+const tkSvg=m=>`<svg class="tk-s" viewBox="0 0 358 132" fill="none"><path d="${TKP}" fill="${m.locked?'#3A404D':'url(#tkg)'}"${m.locked?' stroke="#7B8392" stroke-width="1.5" stroke-dasharray="6 5"':''}/><path d="M256 12V120" stroke="${m.locked?'#6B7382':'#B98A35'}" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 7"/></svg>`;
+
+function tiers(m){
+  if(m.cap)return[];
+  if(!m.locked)return[500,1000,5000];
+  return[m.gap,500,1000,5000].filter((v,i,l)=>l.indexOf(v)===i).slice(0,3);
+}
+function wiOut(m,add){
+  const raw=r2((m.bet+add)*A.rate);
+  return raw>=A.cap?`Daily cap <b>${fmt(A.cap)}</b>`:`Today's Rebate would be <b>${fmt(raw)}</b>`;
+}
+
+const PILE=(()=>{
+  const rows=[7,6,6,5,4,3,2,1],a=[];let s=71;
+  const r=()=>(s=(s*16807)%2147483647)/2147483647;
+  rows.forEach((w,y)=>{for(let i=0;i<w;i++){const x=(i-(w-1)/2)*29;a.push({x:Math.round(x+(r()-.5)*5),y:Math.round(y*17+(r()-.5)*3),z:30-y,r:Math.round((r()-.5)*36),d:Math.abs(x)/29+y*1.05})}});
+  return a.sort((p,q)=>p.d-q.d);
+})();
+const PTIER=[[200,34],[150,29],[100,24],[60,19],[30,14],[15,10],[7.5,7],[6,5],[4.5,4],[3,3],[.01,2],[0,0]];
+const pileN=reb=>PTIER.find(t=>reb>=t[0])[1];
+const coinAt=(c,dp)=>`<img class="cn${dp?' dp':''}" src="assets/coin-c.png" alt="" style="left:${c.x}px;bottom:${c.y}px;z-index:${c.z};--r:${c.r}deg">`;
+const pileHtml=n=>PILE.slice(0,n).map(c=>coinAt(c)).join('');
+function syncCoins(vp,m){
+  const p=vp.querySelector('.cp-p');if(!p)return;
+  const have=p.children.length,want=pileN(m.reb);
+  if(want>have)p.insertAdjacentHTML('beforeend',PILE.slice(have,want).map(c=>coinAt(c,true)).join(''));
+}
+const DOME=`<div class="cp-g"${' data-fxonly="1"'}><u></u><s></s><em>${ic(PL,22,'#3A2300')}</em></div>`;
+
+const CW=326,CH=100,PR=2;
+const rng=s=>()=>(s=(s*16807)%2147483647)/2147483647;
+const c2d=cv=>cv.getContext('2d',{willReadFrequently:true});
+function coat(cv,txt){
+  cv.width=CW*PR;cv.height=CH*PR;
+  const c=c2d(cv);c.setTransform(PR,0,0,PR,0,0);
+  const g=c.createLinearGradient(0,0,CW,CH);
+  g.addColorStop(0,'#DDE0E5');g.addColorStop(.32,'#AEB4BE');g.addColorStop(.52,'#E6E9ED');g.addColorStop(.74,'#B3B9C3');g.addColorStop(1,'#9EA5B0');
+  c.fillStyle=g;c.fillRect(0,0,CW,CH);
+  const r=rng(77);
+  for(let i=0;i<1400;i++){c.fillStyle=r()>.5?'rgba(255,255,255,.26)':'rgba(55,60,72,.13)';c.fillRect(r()*CW,r()*CH,1.3,1.3)}
+  c.fillStyle='#3F4653';c.textAlign='center';c.textBaseline='middle';
+  c.font='700 18px Inter,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif';
+  c.fillText(txt,CW/2,CH/2+1);
+  cv.setAttribute('aria-label',txt);cv.setAttribute('role','img');
+}
+function zig(){
+  const r=rng(2026),pts=[],rows=9;
+  for(let i=0;i<rows;i++){
+    const y=7+i*(CH-14)/(rows-1),e=Math.min(i,rows-1-i),ins=e===0?34:e===1?15:7,l=ins+r()*7,R=CW-ins-r()*7;
+    if(i%2)pts.push([R,y],[l,y+2]);else pts.push([l,y],[R,y+2]);
+  }
+  const fine=[];
+  pts.forEach((p,i)=>{if(!i)return fine.push(p);const q=pts[i-1],n=Math.max(1,Math.round(Math.hypot(p[0]-q[0],p[1]-q[1])/7));for(let k=1;k<=n;k++)fine.push([q[0]+(p[0]-q[0])*k/n,q[1]+(p[1]-q[1])*k/n])});
+  return fine;
+}
+const ZIG=zig();
+function erase(cv,a,b,w){
+  const c=c2d(cv);c.save();c.setTransform(PR,0,0,PR,0,0);c.globalCompositeOperation='destination-out';c.lineCap=c.lineJoin='round';c.lineWidth=w;c.beginPath();c.moveTo(a[0],a[1]);c.lineTo(b[0],b[1]);c.stroke();c.restore();
+}
+function scratchAll(cv){ZIG.forEach((p,i)=>{if(i)erase(cv,ZIG[i-1],p,17)})}
+function autoScratch(cv,ms,alive,done){
+  const t0=performance.now();let k=1;
+  const f=t=>{
+    if(!alive()||!cv.isConnected)return;
+    const to=Math.min(ZIG.length,Math.ceil((t-t0)/ms*ZIG.length));
+    for(;k<to;k++)erase(cv,ZIG[k-1],ZIG[k],17);
+    if(k<ZIG.length)requestAnimationFrame(f);else done();
+  };
+  requestAnimationFrame(f);
+}
+function clearedRate(cv){
+  const d=c2d(cv).getImageData(0,0,cv.width,cv.height).data;let z=0,n=0;
+  for(let i=3;i<d.length;i+=4*24){n++;if(d[i]<40)z++}
+  return n?z/n:0;
+}
+function revealed(vp){vp.querySelector('.sc-h')?.classList.remove('hide')}
+function armScratch(n,vp,cv){
+  let down=false,last=null,off=false;
+  const pos=e=>{const b=cv.getBoundingClientRect();return[(e.clientX-b.left)*CW/b.width,(e.clientY-b.top)*CH/b.height]};
+  const test=()=>{if(off||clearedRate(cv)<.52)return;off=true;cv.classList.remove('can');St[n].scr='done';autoScratch(cv,420,()=>cv.isConnected,()=>revealed(vp))};
+  cv.classList.add('can');
+  cv.addEventListener('pointerdown',e=>{if(off)return;down=true;last=pos(e);try{cv.setPointerCapture(e.pointerId)}catch(x){}erase(cv,last,[last[0]+.1,last[1]],26);test()});
+  cv.addEventListener('pointermove',e=>{if(!down||off)return;const p=pos(e);erase(cv,last,p,26);last=p;test()});
+  const up=()=>{down=false};cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
+}
+const scTxt=m=>`Bet ${fmt(m.gap)}${m.zero?'':' more'} to scratch`;
+
+
+const NTA=m=>m.zero?{a:`${RATE} rebate on every bet`,b:`Bet ${fmt(m.gap)} today to unlock.`}:{a:`${fmt(m.reb)} rebate locked`,b:`Bet ${fmt(m.gap)} more to unlock.`};
+const more=m=>fmt(m.gap)+(m.zero?'':' more');
+const S=[
+{n:1,cn:'跳表',en:'Running Meter',
+ idea:'像打车计价器，第一笔开始就跳，解锁只是把表点亮，表不会停。',
+ how:'灰表变亮表',grow:'数字滚动，跳出 +₱1.50',cost:'不用美术；线上约 60 秒拉一次数，真实效果是一段一段涨。',
+ icon:COIN,nt:NTA,
+ dr:m=>`<div class="mt${m.locked?'':' on'}"><div class="mt-l">Today's Rebate</div><div class="mt-d">${m.locked?`<span class="mt-k">${ic(PL,22,'#8F98A6')}</span>`:''}${mtCells(m)}${m.cap?`<span class="mt-x">${MAX}</span>`:''}</div><div class="mt-c"><span class="cap${m.locked?'':' ok'}">${m.locked?`Bet ${GAP(m)} to unlock higher rebates.`:OKT(m)}</span></div><div class="mt-r"><span>Today's Bet</span><b data-f="bet">${fmt(m.bet)}</b></div><p class="mt-n">${RATE} back on every bet</p></div>`,
+ patch(vp,m,prev){
+  const t=m.reb.toFixed(2).padStart(6,'0').replace('.','');
+  vp.querySelectorAll('.dg').forEach((c,k)=>{setDigit(c,t[k]);c.classList.toggle('z',zeroLead(t,k))});
+  if(!m.locked&&prev&&!prev.locked&&m.reb>prev.reb&&(vp._pf=(vp._pf||0)+1)%3===1)floatUp(vp,r2(m.reb-prev.reb));
+ },hold:1300},
+{n:2,cn:'霓虹灯牌',en:'Neon Sign',
+ idea:'门槛就是开灯，灯亮以后这款游戏一直在给你攒钱。',
+ how:'灯灭变灯亮',grow:'灯一直亮，金额在灯牌下面涨',cost:'要美术出灯牌字；Your rebate is off 可能被理解成活动关了。',
+ icon:'<svg width="38" height="38" viewBox="0 0 38 38" fill="none"><path d="M19 4C12.4 4 7.5 9 7.5 15c0 4 2 6.7 4.3 9 1 1 1.7 2.3 1.7 3.5h11c0-1.2.7-2.5 1.7-3.5 2.3-2.3 4.3-5 4.3-9C30.5 9 25.6 4 19 4Z" fill="#6B7382" stroke="#3A404D" stroke-width="1.5"/><path d="M15 16.5l2.5 2.5 1.5-2 1.5 2 2.5-2.5" stroke="#3A404D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.5 29.5h9M15.5 33h7" stroke="#D5D9E0" stroke-width="2.2" stroke-linecap="round"/></svg>',
+ nt:m=>({a:'Your rebate is off',b:`Bet ${more(m)} to switch it on.`}),
+ dr:m=>`<div class="ne${m.locked?'':' on'}"><div class="ne-t">${RATE} REBATE</div></div>${TWO(m)}${HN(m,`Bet ${GAP(m)} to switch on.`)}`,
+ hold:1500},
+{n:3,cn:'明日兑奖券',en:'Claim Ticket',
+ idea:'今天攒的是一张明天才能兑的券，门槛是给券盖章，盖完券面金额还会涨。只有这个方案天然讲清了「明天领」。',
+ how:'盖章生效',grow:'券面金额继续涨',cost:'要美术出券面和印章；券面金额会变，要看玩家是否接受。',
+ icon:TICKET,bubble:TICKET,
+ nt:m=>m.zero?{a:'Your rebate ticket is ready',b:`Bet ${fmt(m.gap)} to activate it.`}:{a:`Your ${fmt(m.reb)} ticket isn't active yet`,b:`Bet ${fmt(m.gap)} more to activate it.`},
+ dr:m=>`<div class="tk${m.locked?' off':''}"><div class="tk-f">${tkSvg(m)}<div class="tk-l"><span>Today's Rebate</span><b>${COIN}<i data-f="reb">${fmt(m.reb)}</i>${m.cap?MAX:''}</b><small>Today's Bet <i data-f="bet">${fmt(m.bet)}</i></small></div><div class="tk-r${m.locked?'':' on'}">${m.locked?`${ic(PL,24,'#B7BEC7')}<small>${GAP(m)}</small>`:`<em>CLAIM</em><strong>${TMR}</strong>`}</div></div>${m.locked?'':'<div class="tk-st">ACTIVE</div>'}</div>${HN(m,`Bet ${GAP(m)} to activate.`)}`,
+ hold:1400},
+{n:4,cn:'返水小票',en:'Rebate Slip',
+ idea:'不画目标，直接把账算给玩家看，投注变了合计就变，一张小票没有终点。',
+ how:'合计行上锁',grow:'投注行变，合计跟着变',cost:'不用美术；要看小票风格和厅内调性是否搭。',
+ icon:COIN,
+ nt:m=>m.zero?{a:`Your bet × ${RATE} = your rebate`,b:`Bet ${fmt(m.gap)} today to unlock.`}:{a:`${fmt(m.bet)} × ${RATE} = ${fmt(m.reb)}`,b:`Bet ${fmt(m.gap)} more to unlock.`},
+ dr:m=>`<div class="sl${m.locked?'':' on'}"><div class="sl-m"></div><div class="sl-w"><div class="sl-p"><h6>TODAY'S REBATE SLIP</h6><div class="sl-r"><span>Today's Bet</span><b data-f="bet">${fmt(m.bet)}</b></div><div class="sl-r"><span>Rebate</span><b>× ${RATE}</b></div>${m.cap?`<div class="sl-r"><span>Daily cap</span><b>${fmt(A.cap)}</b></div>`:''}<div class="sl-hr"></div><div class="sl-r sl-t"><span>Today's Rebate</span><b>${m.locked?LK(15,'#9A958A'):''}<i data-f="reb">${fmt(m.reb)}</i></b></div><div class="sl-bc"></div></div><div class="sl-z"></div></div></div>${HN(m,`Bet ${GAP(m)} to unlock higher rebates.`)}`,
+ hold:1450},
+{n:5,cn:'再投试算',en:'What If',
+ idea:'不告诉玩家离终点多远，而是让玩家自己看再投一点明天能多拿多少，最直接地表达投得越多返得越多。',
+ how:'第一档就是刚好过门槛',grow:'点档位看结果',cost:'不用美术；最直接引导加码，必须过合规。',
+ icon:COIN,
+ nt:m=>({a:`Bet ${more(m)}`,b:`Unlock ${fmt(A.thr*A.rate)} rebate for tomorrow.`}),
+ dr(m,o){
+  const t=tiers(m),sel=Math.min(o.sel||0,Math.max(t.length-1,0));
+  if(m.cap)return `${TWO(m,' tw0')}<p class="hn ok">${OKT(m)}</p>`;
+  return `${TWO(m,' tw0')}${m.locked?'':`<p class="hn ok">${OKT(m)}</p>`}<div class="wi"><h6>If you bet more today</h6><div class="wi-t">${t.map((v,i)=>`<button class="${i===sel?'on':''}" data-wi="${i}">+${fmt(v)}${m.locked&&v===m.gap?'<em>Unlock</em>':''}</button>`).join('')}</div><div class="wi-r">${COIN}<span>${wiOut(m,t[sel])}</span></div></div>`;
+ },
+ redraw:true,
+ fx(n,s,vp,m,at,next){
+  vp.querySelector('.wi-t em')?.classList.add('out');
+  vp.querySelector('[data-f="bet"]').textContent=fmt(m.bet);
+  vp.querySelector('[data-f="reb"]').textContent=fmt(m.reb);
+  at(330,()=>{St[n].sel[1]=0;draw3(n,m,{fx:true});at(1100,next)});
+ }},
+{n:6,cn:'机器人说',en:'Robot Says',
+ idea:'不要卡片和图表，让小机器人用一两句话告诉玩家。它已经是厅内的角色，通知、抽屉、气泡一个声音。',
+ how:'一句话',grow:'一句话，数字变大',cost:'要美术出几个表情；句子长，多语言要看长度。',
+ face:true,speech:true,
+ nt:m=>m.zero?{a:`I can hold ${RATE} of every bet for you.`,b:`Bet ${fmt(m.gap)} today to unlock it.`}:{a:`I'm holding ${fmt(m.reb)} for you!`,b:`Bet ${fmt(m.gap)} more to unlock it.`},
+ dr(m){
+  const t=m.locked?(m.zero?[`I can hold ${RATE} of every bet for you.`,`Bet <b data-f="gap">${fmt(m.gap)}</b> today to unlock it.`]:[`I'm holding <b data-f="reb">${fmt(m.reb)}</b> for you.`,`Bet <b data-f="gap">${fmt(m.gap)}</b> more to unlock it.`]):m.cap?[`You've hit today's cap: <b>${fmt(A.cap)}</b>.`,'See you tomorrow!']:[`You've bet <b data-f="bet">${fmt(m.bet)}</b> today.`,`<b data-f="reb">${fmt(m.reb)}</b> is yours tomorrow!`];
+  return `<div class="rs"><img class="rs-r" src="${ROBOT}" alt=""><div class="rs-b"><p>${t[0]}</p><p>${t[1]}</p></div></div>`;
+ },
+ hold:1400},
+{n:7,cn:'金币堆',en:'Coin Pile',
+ idea:'不是往容器里装，是往上堆，堆没有顶。门槛是把罩子打开。',
+ how:'玻璃罩打开',grow:'金币越堆越高',cost:'要美术出多档金币堆，美术量最大。',
+ icon:`<img class="mc1" src="assets/coin-c.png" alt="" style="left:1px;bottom:2px"><img class="mc1" src="assets/coin-c.png" alt="" style="left:16px;bottom:2px"><img class="mc1" src="assets/coin-c.png" alt="" style="left:9px;bottom:15px">`,
+ nt:NTA,
+ dr:(m,o)=>`<div class="cp${m.locked?' lkd':''}"><div class="cp-b"></div><div class="cp-p">${pileHtml(pileN(m.reb))}</div>${m.locked||o.fx?DOME:''}</div>${TWO(m)}<div class="cp-c"><span class="cap${m.locked?'':' ok'}">${m.locked?`Bet ${GAP(m)} to unlock higher rebates.`:OKT(m)}</span></div>`,
+ patch:(vp,m)=>syncCoins(vp,m),hold:1500},
+{n:8,cn:'刮刮卡',en:'Scratch Card',
+ idea:'把门槛变成一次揭晓，解锁前看不到金额，用好奇代替差额。这是唯一隐藏金额的方案。',
+ how:'够了才能刮',grow:'刮开以后金额还会涨',cost:'要美术出涂层；和厅外 Today 卡露金额的做法不一致，要运营判断。',
+ icon:'<i class="msc"></i>',
+ nt:m=>({a:'Your scratch card is waiting',b:`Bet ${more(m)} to scratch it.`}),
+ dr:(m,o)=>`<div class="sc"><div class="sc-u">${m.locked?'':`<span>Today's Rebate</span><b>${COIN}<i data-f="reb">${fmt(m.reb)}</i>${m.cap?MAX:''}</b>`}</div><canvas class="sc-cv"></canvas></div><div class="sc-b"><span>Today's Bet</span><b data-f="bet">${fmt(m.bet)}</b></div>${m.locked?'':`<p class="hn ok sc-h${o.scr==='ready'?' hide':''}">${OKT(m)}</p>`}`,
+ after(n,vp,m,o){
+  const cv=vp.querySelector('.sc-cv');if(!cv)return;
+  if(m.locked)return coat(cv,scTxt(m));
+  coat(cv,'Scratch to reveal');
+  if(St[n].scr==='ready'&&o.k===3){if(!o.noArm)armScratch(n,vp,cv)}else scratchAll(cv);
+ },
+ patch(vp,m,prev){const cv=vp.querySelector('.sc-cv');if(m.locked&&cv)coat(cv,scTxt(m))},
+ fx(n,s,vp,m,at,next,alive){
+  St[n].scr='ready';draw3(n,m,{noArm:true});
+  at(800,()=>{const cv=vp.querySelector('.sc-cv');autoScratch(cv,950,alive,()=>{St[n].scr='done';revealed(vp);at(520,next)})});
+ }}
+];
+
+
+const St={};S.forEach(s=>{St[s.n]={sel:[0,0],scr:'done'}});
+const VP=(n,k)=>document.getElementById(`p${n}-${k}`);
+const DOCK='<div class="dock"><img src="assets/robot-peek.webp" alt=""></div>';
+const shell=(s,body,fx)=>`<div class="hm"></div><div class="dr${fx?' fx':''}"><div class="dh">${RATE} Daily Rebate<span class="dx">${ic(PX,24,'#8F98A6')}</span></div><div class="dr-b">${body}</div></div>`;
+function notice(s,m){
+  const t=s.nt(m),i=s.face?'<span class="ni fc"></span>':`<span class="ni">${s.icon}</span>`;
+  return `<div class="nb">${i}<div class="tt"><h5>${t.a}</h5><p>${t.b}</p></div><span class="x">${ic(PX,24,'#fff')}</span></div>`;
+}
+function bubble(s,m){
+  const t=`<span><b>${fmt(m.reb)}</b> rebate is claimable tomorrow.</span>`;
+  return s.speech?`<div class="bb sp">${t}</div>`:`<div class="bb">${s.bubble||COIN}${t}</div>`;
+}
+function draw1(s,m){VP(s.n,1).innerHTML=`<div class="rbt"><img src="assets/robot.webp" alt=""><span class="pill">${RATE}</span></div>${notice(s,m)}`}
+function drawDr(s,k,m,o={}){
+  const vp=VP(s.n,k),c={k,sel:St[s.n].sel[k-2],scr:St[s.n].scr,fx:o.fx,noArm:o.noArm};
+  vp.innerHTML=DOCK+shell(s,s.dr(m,c),o.fx);vp._m=m;
+  if(s.after)s.after(s.n,vp,m,c);
+}
+const draw3=(n,m,o)=>drawDr(S[n-1],3,m,o);
+function draw4(s,m){VP(s.n,4).innerHTML=`${DOCK}${bubble(s,m)}`}
+function paintLow(s){const m=M(G.low);draw1(s,m);drawDr(s,2,m)}
+function paintHigh(s){const m=M(G.high);St[s.n].scr='done';drawDr(s,3,m);draw4(s,m)}
+function patch(s,vp,m,prev){
+  vp._m=m;
+  if(s.redraw){vp.querySelector('.dr-b').innerHTML=s.dr(m,{k:3,sel:St[s.n].sel[1]});return}
+  vp.querySelectorAll('[data-f]').forEach(e=>{const v=fmt(m[e.dataset.f]);if(e.textContent!==v)e.textContent=v});
+  if(s.patch)s.patch(vp,m,prev);
+}
+
+const PLAY={};
+function setBtn(n,on){const b=document.querySelector(`[data-play="${n}"]`);if(!b)return;b.textContent=on?'↻ 重新播放':'▶ 播放';b.classList.toggle('ing',on)}
+function stopPlay(n){const p=PLAY[n];if(!p)return;p.dead=true;p.t.forEach(clearTimeout);delete PLAY[n];setBtn(n,false)}
+function fxEnd(vp){vp.querySelector('.dr')?.classList.remove('fx');vp.querySelectorAll('[data-fxonly]').forEach(e=>e.remove())}
+function play(n){
+  stopPlay(n);
+  const s=S[n-1],vp=VP(n,3),p=PLAY[n]={dead:false,t:[]},alive=()=>!p.dead;
+  const at=(ms,f)=>{p.t.push(setTimeout(()=>{if(!p.dead)f()},ms))};
+  setBtn(n,true);St[n].scr='done';
+  let m=M(300);draw3(n,m);
+  const run=(list,ms,done)=>{let i=0;const step=()=>{if(i>=list.length)return done();const prev=m;m=M(list[i++]);patch(s,vp,m,prev);at(ms,step)};step()};
+  const up=[];for(let b=320;b<500;b+=20)up.push(b);
+  const on=[];for(let b=600;b<2350;b+=100)on.push(b);on.push(2350);
+  at(700,()=>run(up,110,()=>{
+    m=M(A.thr);
+    const go=()=>{fxEnd(vp);run(on,170,()=>at(1800,()=>{stopPlay(n);paintHigh(s)}))};
+    if(s.fx)s.fx(n,s,vp,m,at,go,alive);else{draw3(n,m,{fx:true});at(s.hold,go)}
+  }));
+}
+
+const CT=[['low','未达门槛的今日投注','第 1、2 台',[['₱0',0],['₱300',300],['₱400',400]]],['high','已达门槛的今日投注','第 3、4 台',[['₱500',500],['₱2,350',2350],['₱15,000（封顶）',15000]]]];
+document.getElementById('ctrl').innerHTML=CT.map(([k,l,t,o])=>`<div class="cg"><label>${l}</label><div class="seg" data-k="${k}">${o.map(([x,v])=>`<button data-val="${v}">${x}</button>`).join('')}</div><small>${t}</small></div>`).join('');
+function syncCtl(){document.querySelectorAll('#ctrl .seg').forEach(g=>g.querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.val===G[g.dataset.k])))}
+document.getElementById('ctrl').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  const k=b.parentElement.dataset.k;G[k]=+b.dataset.val;syncCtl();
+  if(k==='low')S.forEach(paintLow);else S.forEach(s=>{stopPlay(s.n);paintHigh(s)});
+});
+
+const CAPT=['进厅','抽屉：未达门槛','抽屉：已达门槛','继续玩'];
+document.getElementById('list').innerHTML=S.map(s=>`<article class="pl" id="s${s.n}"><div class="pl-h"><span class="no">${s.n}</span><h2>${s.cn} <em>${s.en}</em></h2></div><p class="idea">${s.idea}</p><div class="tags">${[['门槛怎么说',s.how],['越投越多怎么说',s.grow],['代价',s.cost]].map(([l,t])=>`<div class="tag"><label>${l}</label><span>${t}</span></div>`).join('')}</div><div class="row">${CAPT.map((c,i)=>`<figure class="pc"><figcaption><i>${i+1}</i>${c}${i===2?`<span class="pb-w">${s.n===8?'<button class="pb2" data-cover="8">动手刮</button>':''}<button class="pb" data-play="${s.n}">▶ 播放</button></span>`:''}</figcaption><div class="pw"><div class="phone"><div class="vp" id="p${s.n}-${i+1}" data-n="${s.n}" data-k="${i+1}"></div><img class="sf t" src="assets/sf-top.png" alt=""><img class="sf b" src="assets/sf-bot.png" alt=""></div></div></figure>`).join('')}</div></article>`).join('');
+document.getElementById('list').addEventListener('click',e=>{
+  const b=e.target.closest('[data-play]');if(b)return play(+b.dataset.play);
+  const c=e.target.closest('[data-cover]');
+  if(c){stopPlay(8);St[8].scr='ready';return draw3(8,M(G.high))}
+  const t=e.target.closest('[data-wi]');if(!t)return;
+  const vp=t.closest('.vp'),n=+vp.dataset.n,k=+vp.dataset.k;
+  St[n].sel[k-2]=+t.dataset.wi;
+  vp.querySelector('.dr-b').innerHTML=S[n-1].dr(vp._m,{k,sel:St[n].sel[k-2]});
+});
+document.getElementById('cmp').innerHTML='<tr><th>方案</th><th>主角</th><th>门槛怎么说</th><th>越投越多怎么说</th><th>美术量</th><th>要确认</th></tr>'+[
+ ['1 跳表','金额数字','灰表变亮表','数字滚动','无','线上数字是一段一段涨'],
+ ['2 霓虹灯牌','状态','灯灭变灯亮','灯亮着金额涨','低','Rebate is off 会不会被误解'],
+ ['3 明日兑奖券','一张券','盖章生效','券面金额涨','中','券面金额会变能否接受'],
+ ['4 返水小票','算账过程','合计行上锁','合计跟着变','低','风格和厅内是否搭'],
+ ['5 再投试算','再投多少得多少','第一档过门槛','自己点档位看','无','引导加码，要过合规'],
+ ['6 机器人说','一句话','机器人说','机器人说','中','多语言长度'],
+ ['7 金币堆','插画','玻璃罩打开','越堆越高','高','分档数量'],
+ ['8 刮刮卡','揭晓仪式','刮开','刮开后继续涨','中','解锁前不露金额是否可行']
+].map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('');
+
+function fit(){
+  const w=document.getElementById('list').clientWidth,s=(w-3*16-4)/(4*390);
+  document.documentElement.style.setProperty('--s',s>=.74?Math.min(s,.83).toFixed(3):'.83');
+}
+addEventListener('resize',fit);fit();
+syncCtl();S.forEach(paintLow);S.forEach(paintHigh);
+</script>
+</body>
+</html>
