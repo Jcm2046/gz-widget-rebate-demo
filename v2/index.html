@@ -218,13 +218,10 @@ table.cmp td:first-child{font-weight:600;white-space:nowrap}
 .nt p{font-size:11.5px;line-height:16px;white-space:nowrap}
 .nt .tt{flex:1;min-width:0}
 .nt .x{flex:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.n1{left:12px;right:12px;top:10px;height:56px;display:flex;align-items:center;gap:4px;padding:8px 10px 8px 12px;border-radius:12px;overflow:hidden;background:linear-gradient(90deg,#DE4444,#F95858);box-shadow:0 6px 16px rgba(0,0,0,.35)}
-.n1>img{flex:none;width:40px;height:40px}
-.n1 h5{font-size:14px;line-height:22px;font-weight:500}
-.n1 p{font-size:12px;line-height:18px}
-.n1 .ac{flex:none;height:28px;padding:0 14px;border-radius:99px;background:#fff;color:#E5484D;font-size:13px;font-weight:500;line-height:28px}
-.n1 .x{width:24px;height:24px}
-.n1 .pg{position:absolute;left:0;bottom:0;height:2px;background:var(--pg)}
+.n1{left:12px;right:12px;top:10px;min-height:48px;display:flex;align-items:center;gap:8px;padding:12px 12px 12px 16px;border-radius:12px;background:var(--m);box-shadow:0 0 0 1px var(--ln),0 6px 16px rgba(0,0,0,.4)}
+.n1 .s1{flex:1;min-width:0;font-size:14px;line-height:20px;font-weight:500;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.n1 .s1 b{color:var(--g);font-weight:600}
+.n1 .x{width:20px;height:20px}
 .n2{left:12px;right:12px;top:10px;height:84px;display:flex;align-items:center;gap:8px;padding:8px 12px 8px 8px;border-radius:14px;background:linear-gradient(180deg,#5C4B33,#3B2F22);box-shadow:inset 0 0 0 1px rgba(234,192,112,.6),0 6px 16px rgba(0,0,0,.4)}
 .n2>img{flex:none;width:62px;height:auto}
 .n2 p{color:#E6DCC4}
@@ -307,19 +304,19 @@ table.cmp td:first-child{font-weight:600;white-space:nowrap}
 .vp>.hs-t{top:220px;z-index:14}
 .two.tw0{margin:0 16px 10px}
 
-.td{position:relative;margin:0 16px;height:112px;border-radius:26px;background:linear-gradient(180deg,#CB3E3D,#621819);font-family:"Open Sans",Inter,-apple-system,BlinkMacSystemFont,Arial,sans-serif}
-.td:before{content:"";position:absolute;inset:0;border:24px solid transparent;border-image:url(assets/today-frame.png) 44/24px round;pointer-events:none}
-.tdp{position:absolute;top:13px;left:50%;transform:translateX(-50%);height:18px;padding:0 10px;border-radius:100px;background:#7B2413;font-size:10px;line-height:18px;color:#FFE3C8;white-space:nowrap}
-.tdp:after{content:"";position:absolute;left:24px;bottom:-3px;width:8px;height:8px;background:#7B2413;transform:rotate(45deg)}
-.tdp b{color:#FFD97A;font-weight:700}
+.td{position:relative;margin:0 16px;height:112px;border-radius:12px;background:var(--i)}
+.tdp{position:absolute;top:13px;left:50%;transform:translateX(-50%);height:18px;padding:0 10px;border-radius:100px;background:var(--tt);font-size:10px;line-height:18px;color:var(--t2);white-space:nowrap}
+.tdp:after{content:"";position:absolute;left:24px;bottom:-3px;width:8px;height:8px;background:var(--tt);transform:rotate(45deg)}
+.tdp b{color:var(--g);font-weight:700}
 .tdp.rr{left:auto;right:30px;transform:none}
 .tdp.rr:after{left:auto;right:46px}
 .tdc{position:absolute;left:16px;right:16px;top:38px;display:flex;align-items:center}
 .tdc div{flex:1;min-width:0;text-align:center}
-.tdc span{display:block;font-size:14px;line-height:19px;color:#fff}
-.tdc b{display:inline-flex;align-items:center;gap:6px;margin-top:2px;font-size:20px;line-height:27px;font-weight:700;color:#FFD97A;font-variant-numeric:tabular-nums}
-.tdc b.lk1{color:#fff}
-.tdc i{flex:none;width:1px;height:34px;background:rgba(255,255,255,.55)}
+.tdc span{display:block;font-size:14px;line-height:19px;color:var(--t3)}
+.tdc b{display:inline-flex;align-items:center;gap:6px;margin-top:2px;font-size:20px;line-height:27px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
+.tdc b.gd{color:var(--g)}
+.tdc b.lk1{color:var(--t3)}
+.tdc i{flex:none;width:1px;height:34px;background:var(--ln)}
 .tdc .max{display:inline-block;height:14px;padding:0 3px;font-size:9px;line-height:14px;font-weight:900}
 .cd{margin:0 16px;padding:12px;border-radius:12px;background:var(--i)}
 .cd .r{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;line-height:18px;color:var(--t3)}
@@ -444,7 +441,7 @@ table.cmp td:first-child{font-weight:600;white-space:nowrap}
 const A={rate:.015,thr:500,cap:200,vip:.0008,games:8};
 const G={user:'joined',bet:300,gap:3,copy:'rate',list:1,game:'act'};
 const SC=[
- {id:'A',n:1,d:1,p:1,rec:true,t:'系统横幅',tag:'推荐',sub:'用组件库现成的通知横幅，最省，和全站一致',notes:['<b>通知</b>：Notification Banner With Progress，底部 2 像素进度线。','<b>抽屉</b>：和活动页同款 Today 卡，今日投注和今日返水两列，小气泡写差多少解锁或明天可领。','<b>按钮</b>：面板最左加 Rebate，面板加宽到 216。']},
+ {id:'A',n:1,d:1,p:1,rec:true,t:'系统横幅',tag:'推荐',sub:'一句话通知 + 素色 Today 卡，不用美术，最省',notes:['<b>通知</b>：深色一句话横幅，不带图标、金额和进度线；5 秒自动消失，可点 × 关，点整条开抽屉。','<b>抽屉</b>：素色 Today 卡，去掉金边和红底，今日投注和今日返水两列，小气泡写差多少解锁或明天可领。','<b>按钮</b>：面板最左加 Rebate，面板加宽到 216。']},
  {id:'B',n:2,d:4,p:4,t:'任务进度',tag:'参考图思路',sub:'把线性返水拆成几个投注目标，追着做任务',notes:['<b>通知</b>：金棕进度卡，进度条、可得金额、View 都露出来。','<b>抽屉</b>：今日两项 + 任务清单，每行一个投注目标和对应金额。','<b>按钮</b>：标签直接显示今日金额，未解锁带锁。']},
  {id:'C',n:3,d:2,p:2,t:'环形进度',tag:'抽屉最矮',sub:'通知、抽屉、按钮都用同一个环，一眼看到走到哪了',notes:['<b>通知</b>：顶部深色横幅，左侧环形进度。','<b>抽屉</b>：矮抽屉，环形主视觉，一眼看到还差多少。','<b>按钮</b>：图标外圈是进度环，标签显示百分比。']},
  {id:'D',n:4,d:3,p:3,t:'里程碑路线',tag:'面板不加宽',sub:'把 60%、80% 做成路上的节点，每次提醒点亮一格',notes:['<b>通知</b>：横幅带 60、80、100 三个节点。','<b>抽屉</b>：今日两项 + 时间线，走到哪一步一目了然。','<b>按钮</b>：不加宽面板，入口行放在原 Rebate 行位置。']},
@@ -490,11 +487,18 @@ function msg(k,m){
   if(k==='p60')return{a:`60% done! ${fmt(m.gap)} more`,b:`to unlock ${goal}`};
   return{a:m.bet?`Bet ${fmt(m.gap)} more`:`Bet ${fmt(m.gap)}`,b:`to unlock ${goal}`};
 }
+function one(k,m){
+  const r=`<b>${pct(A.rate)}</b>`,goal=G.copy==='amt'?`<b>${fmt(A.thr*A.rate)}</b> rebate`:`${r} rebate`,g=`<b>${fmt(m.gap)}</b>`;
+  if(k==='join')return `Join now to earn ${r} rebate.`;
+  if(k==='deposit')return `Deposit to join the ${r} rebate.`;
+  if(m.p>=.8)return `Just ${g} more to unlock ${goal}!`;
+  return m.bet?`Bet ${g} more to unlock ${goal}.`:`Bet ${g} to unlock ${goal}.`;
+}
 
 function notice(ph,m,fresh){
   const k=ph.v.nt;if(!k)return '';
-  const t=msg(k,m),show=m.joined,w=Math.round(m.p*100),f=fresh?' fresh':'',n=ph.cfg.n,xc=n===1?'#FFFFFF':n===2?'#2B2B2B':'#8F98A6',x=`<span class="x" data-a="nt-x">${ic(PX,n===2?16:n===4?18:24,xc)}</span>`,st=show?stageOf(m.p):0;
-  if(n===1)return `<div class="nt n1${f}" data-a="dr">${COIN}<div class="tt"><h5>${t.a}</h5><p>${t.b}</p></div><span class="ac">View</span>${x}${show?`<i class="pg" style="width:${w}%"></i>`:''}</div>`;
+  const t=msg(k,m),show=m.joined,w=Math.round(m.p*100),f=fresh?' fresh':'',n=ph.cfg.n,xc=n===2?'#2B2B2B':'#8F98A6',x=`<span class="x" data-a="nt-x">${ic(PX,n===2?16:n===4?18:n===1?20:24,xc)}</span>`,st=show?stageOf(m.p):0;
+  if(n===1)return `<div class="nt n1${f}" data-a="dr"><div class="s1">${one(k,m)}</div>${x}</div>`;
   if(n===2)return `<div class="nt n2${f}" data-a="dr">${x}${CHEST(0).replace('cs0','')}<div class="tt"><h5>${t.a}</h5><p>${t.b}</p>${show?`<div class="b2"><i style="width:${w}%"></i><em>${fmt0(m.bet)} / ${fmt0(A.thr)}</em></div>`:''}</div><div class="rt"><b>${fmt(A.thr*A.rate)}</b><span class="ac">View</span></div></div>`;
   if(n===3)return `<div class="nt n3${f}" data-a="dr"><div class="rw">${show?ring(36,4,m.p)+w+'%':COIN}</div><div class="tt"><h5>${t.a}</h5><p>${t.b}</p></div>${x}</div>`;
   if(n===4)return `<div class="nt n4${f}${show?'':' s'}" data-a="dr">${x}<div class="hl"><b>${t.a}</b> ${t.b}</div>${show?`<div class="tk"><div class="ln"><i style="width:${w}%"></i></div>${[60,80,100].map(v=>`<span class="nd${w>=v?' on':''}" style="left:${v}%"><em>${v===100?pct(A.rate):v+'%'}</em></span>`).join('')}</div>`:''}</div>`;
@@ -538,7 +542,7 @@ function joinBody(m,load){
 }
 function d1(m){
   const lk=m.lv==='lock'||m.lv==='zero';
-  return `<div class="td"><span class="tdp${lk?'':' rr'}">${hintOf(m)}</span><div class="tdc"><div><span>Today's Bet</span><b>${fmt(m.bet)}</b></div><i></i><div><span>Today's Rebate</span><b class="${lk?'lk1':''}">${lk?ic(PL,16,'#FFD040'):''}${fmt(m.reb)}${m.lv==='cap'?MAX:''}</b></div></div></div>`;
+  return `<div class="td"><span class="tdp${lk?'':' rr'}">${hintOf(m)}</span><div class="tdc"><div><span>Today's Bet</span><b>${fmt(m.bet)}</b></div><i></i><div><span>Today's Rebate</span><b class="${lk?'lk1':'gd'}">${lk?ic(PL,16,'#8F98A6'):''}${fmt(m.reb)}${m.lv==='cap'?MAX:''}</b></div></div></div>`;
 }
 function d2(m){
   const lk=m.lv==='lock'||m.lv==='zero',pp=lk?m.p:m.reb/A.cap;
@@ -662,7 +666,7 @@ document.getElementById('ctrl').addEventListener('click',e=>{
 });
 
 const MIX=[['n','通知'],['d','抽屉'],['p','按钮']];
-const MIXN={n:['横幅','进度卡','环形','里程碑','宝箱'],d:['进度卡','环形','时间线','任务','宝箱'],p:['四按钮','进度环','入口行','金额','宝箱']};
+const MIXN={n:['横幅','进度卡','环形','里程碑','宝箱'],d:['Today 卡','环形','时间线','任务','宝箱'],p:['四按钮','进度环','入口行','金额','宝箱']};
 document.getElementById('grid').innerHTML=SC.map(c=>`<article class="v${c.rec?' rec':''}" id="v-${c.id}"><div class="vh"><span class="vt">${c.id==='X'?'+':c.id}</span><h2>${c.t}</h2><span class="net">${c.tag}</span></div><p class="vsub">${c.sub}</p>${c.mix?`<div class="mix">${MIX.map(([k,l])=>`<div class="cg"><label>${l}</label><div class="seg" data-mix="${k}">${MIXN[k].map((t,i)=>`<button data-val="${i+1}">${t}</button>`).join('')}</div></div>`).join('')}</div>`:''}<div class="phone"><div class="vp" id="ph-${c.id}"></div><img class="sf t" src="assets/sf-top.png" alt=""><img class="sf b" src="assets/sf-bot.png" alt=""></div><button class="rp" data-rp="${c.id}">▶ 只重播这台</button><ul class="vn">${c.notes.map(n=>`<li>${n}</li>`).join('')}</ul></article>`).join('');
 function syncMix(){
   document.querySelectorAll('[data-mix]').forEach(s=>{const k=s.dataset.mix;s.querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.val===PH.X.cfg[k]))});
@@ -689,7 +693,7 @@ document.getElementById('rule').innerHTML=`<tr><th>玩家状态</th><th>提醒�
  ['已达门槛，含封顶','机器人气泡：₱35.25 rebate is claimable tomorrow.','进厅吸边后、刚达门槛时，之后每 3 或 5 分钟','3 秒后收起','打开抽屉']]
 .map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('');
 document.getElementById('cmp').innerHTML=`<tr><th>方案</th><th>通知</th><th>抽屉</th><th>面板按钮</th><th>遮挡游戏</th><th>美术</th><th>主要风险</th></tr>`+
-[['A 系统横幅（推荐）','组件库红色横幅，56 高','Today 卡，和活动页同款，最矮','四按钮，面板加宽','顶部 56 高','最少，图标已有','红色偏强，和维护、风险类通知同一种样式'],
+[['A 系统横幅（推荐）','深色一句话横幅，48 高','素色 Today 卡，最矮','四按钮，面板加宽','顶部 48 高','不用美术','深色横幅压在深色游戏画面上，醒目程度靠描边和阴影'],
  ['B 任务进度','金棕进度卡，84 高','今日两项 + 任务清单','标签显示今日金额','顶部 84 高，最大','中，卡面和按钮','实际是线性返水，清单里的目标是示例，玩家可能当成分档'],
  ['C 环形进度','深色横幅带环形进度，52 高','矮抽屉，环形主视觉','进度环','顶部 52 高','少','横幅没有按钮，玩家不一定知道能点'],
  ['D 里程碑路线','横幅带节点，76 高','今日两项 + 时间线','入口行，面板不加宽','顶部 76 高','少','首屏信息略多，节点要和提醒规则一起改'],
