@@ -309,15 +309,16 @@ table.cmp td:first-child{font-weight:600;white-space:nowrap}
 .tdp{position:absolute;top:13px;left:50%;transform:translateX(-50%);height:18px;padding:0 10px;border-radius:100px;background:var(--tt);font-size:10px;line-height:18px;color:var(--t2);white-space:nowrap}
 .tdp:after{content:"";position:absolute;left:24px;bottom:-3px;width:8px;height:8px;background:var(--tt);transform:rotate(45deg)}
 .tdp b{color:var(--g);font-weight:700}
-.tdp.rr{left:auto;right:30px;transform:none}
-.tdp.rr:after{left:auto;right:46px}
-.tdc{position:absolute;left:16px;right:16px;top:38px;display:flex;align-items:center}
+.tdp.rr{left:auto;right:70px;transform:none}
+.tdp.rr:after{left:auto;right:26px}
+.tdc{position:absolute;left:16px;right:16px;top:38px;display:flex;align-items:flex-start}
+.tdc em.cp{display:block;margin-top:2px;font-size:12px;line-height:16px;font-style:normal;color:var(--t4)}
 .tdc div{flex:1;min-width:0;text-align:center}
 .tdc span{display:block;font-size:14px;line-height:19px;color:var(--t3)}
 .tdc b{display:inline-flex;align-items:center;gap:6px;margin-top:2px;font-size:20px;line-height:27px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
 .tdc b.gd{color:var(--g)}
 .tdc b.lk1{color:var(--t3)}
-.tdc i{flex:none;width:1px;height:34px;background:var(--ln)}
+.tdc i{flex:none;align-self:center;width:1px;height:34px;background:var(--ln)}
 .tdc .max{display:inline-block;height:14px;padding:0 3px;font-size:9px;line-height:14px;font-weight:900}
 .cd{margin:0 16px;padding:12px;border-radius:12px;background:var(--i)}
 .cd .r{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;line-height:18px;color:var(--t3)}
@@ -545,8 +546,8 @@ function joinBody(m,load){
   return `<div class="jn"><h4>${d?`Deposit to join the <b>${pct(A.rate)}</b> rebate`:`Join to earn <b>${pct(A.rate)}</b> rebate`}</h4><div class="st3"><div><i>1</i>${d?'Deposit':'Join'}</div><u></u><div><i>2</i>Bet ${fmt0(A.thr)}+ today</div><u></u><div><i>3</i>Claim tomorrow</div></div></div><button class="cta" data-a="${d?'dr-dep':'dr-join'}"${load?' disabled':''}>${load?'Joining...':d?'Deposit to Join':'Join Now'}</button>`;
 }
 function d1(m){
-  const lk=m.lv==='lock'||m.lv==='zero';
-  return `<div class="td"><span class="tdp${lk?'':' rr'}">${hintOf(m,1)}</span><div class="tdc"><div><span>Today's Bet</span><b>${fmt(m.bet)}</b></div><i></i><div><span>Today's Rebate</span><b class="${lk?'lk1':'gd'}">${lk?ic(PL,16,'#8F98A6'):''}${fmt(m.reb)}${m.lv==='cap'?MAX:''}</b></div></div></div>`;
+  const lk=m.lv==='lock'||m.lv==='zero',cap=m.lv==='cap';
+  return `<div class="td"><span class="tdp${lk?'':' rr'}">${cap?'Claimable tomorrow.':hintOf(m,1)}</span><div class="tdc"><div><span>Today's Bet</span><b>${fmt(m.bet)}</b>${cap?'<em class="cp">Daily cap reached.</em>':''}</div><i></i><div><span>Today's Rebate</span><b class="${lk?'lk1':'gd'}">${lk?ic(PL,16,'#8F98A6'):''}${fmt(m.reb)}${cap?MAX:''}</b></div></div></div>`;
 }
 function d2(m){
   const lk=m.lv==='lock'||m.lv==='zero',pp=lk?m.p:m.reb/A.cap;
