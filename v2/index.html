@@ -495,7 +495,7 @@ function one(k,m){
   if(k==='join')return `Join now to earn ${r} rebate.`;
   if(k==='deposit')return `Deposit to join the ${r} rebate.`;
   if(k==='reached')return `<b>${fmt(m.reb)}</b> rebate is claimable tomorrow.`;
-  if(m.p>=.8)return `Just ${g} more to unlock ${goal}!`;
+  if(m.p>=.6)return `Just ${g} more to unlock ${goal}!`;
   return m.bet?`Bet ${g} more to unlock ${goal}.`:`Bet ${g} to unlock ${goal}.`;
 }
 
