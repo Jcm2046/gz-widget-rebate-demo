@@ -264,7 +264,7 @@ table.cmp td:first-child{font-weight:600;white-space:nowrap}
 @keyframes cshake{0%,100%{transform:rotate(0)}25%{transform:rotate(-4deg)}75%{transform:rotate(4deg)}}
 @keyframes cglow{0%,100%{filter:drop-shadow(0 0 3px #FFD875)}50%{filter:drop-shadow(0 0 12px #FFD875)}}
 
-.bb{position:absolute;z-index:9;right:34px;top:138px;height:42px;display:flex;align-items:center;gap:6px;padding:0 12px 0 7px;border-radius:21px 10px 10px 21px;background:var(--m);box-shadow:0 0 0 1px rgba(234,192,112,.55),0 4px 12px rgba(0,0,0,.5);color:var(--t2);font-size:12.5px;line-height:16px;white-space:nowrap;cursor:pointer}
+.bb{position:absolute;z-index:9;right:34px;top:138px;height:42px;display:flex;align-items:center;gap:6px;padding:0 12px 0 14px;border-radius:21px 10px 10px 21px;background:var(--m);box-shadow:0 0 0 1px rgba(234,192,112,.55),0 4px 12px rgba(0,0,0,.5);color:var(--t2);font-size:12.5px;line-height:16px;white-space:nowrap;cursor:pointer}
 .bb.fresh{animation:bbin .26s ease-out}
 @keyframes bbin{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
 .bb:after{content:"";position:absolute;right:-5px;top:15px;width:10px;height:10px;background:var(--m);transform:rotate(45deg);box-shadow:1px -1px 0 rgba(234,192,112,.55)}
@@ -416,7 +416,7 @@ table.cmp td:first-child{font-weight:600;white-space:nowrap}
       <div class="box" style="margin-top:16px"><h3>开发备注</h3><ol>
         <li>厅内自动报名：玩家从 Deposit to Join 充值，到账时还在这款活动游戏里，就自动调报名；失败或已离开游戏，按现状显示 Join Now。</li>
         <li>这条只限厅内，厅外仍是到账只解锁。</li>
-        <li>奖励金额旁用投注金图标，返水活动发的是投注金。Rebate 按钮用活动入口图标，不代表任何资产。</li>
+        <li>顶部通知和机器人气泡都不带图标。Rebate 按钮用活动入口图标，不代表任何资产。</li>
       </ol></div>
     </div>
     <div class="box"><h3>待确认</h3><ol>
@@ -585,7 +585,7 @@ const PH={};
 function pillText(m){return m.hit?(m.joined?pct(A.rate):'Join '+pct(A.rate)):pct(A.vip)}
 function bubble(ph,m,fresh){
   if(!ph.v.say||ph.v.view!=='dock')return '';
-  return `<div class="bb${fresh?' fresh':''}" data-a="dr">${COIN}<span><b>${fmt(m.reb)}</b> rebate is claimable tomorrow.</span></div>`;
+  return `<div class="bb${fresh?' fresh':''}" data-a="dr"><span><b>${fmt(m.reb)}</b> rebate is claimable tomorrow.</span></div>`;
 }
 function draw(ph,opt={}){
   const v=ph.v,m=model(ph);let h='';
