@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>达到门槛通知 · 解锁动效演示</title>
+<link rel="icon" href="data:,">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{font:14px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;color:#1c2330;background:#f4f5f7}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+button:disabled{cursor:not-allowed}
+.wrap{max-width:1080px;margin:0 auto;padding:16px 20px 48px}
+.main{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto 1fr;grid-template-areas:"ph hd" "ph ctl" "ph nts";gap:14px 28px;align-items:start}
+.a-hd{grid-area:hd}.a-ctl{grid-area:ctl}.a-nts{grid-area:nts}
+.a-ph{grid-area:ph;position:sticky;top:16px}
+.hd h1{font-size:22px;line-height:1.3;font-weight:700}
+.hd p{margin-top:6px;font-size:13.5px;color:#5b6472}
+.card{background:#fff;border:1px solid #e4e6ea;border-radius:12px;padding:14px 16px}
+.card+.card{margin-top:12px}
+.card h2{font-size:15px;line-height:1.4;font-weight:700;margin-bottom:8px}
+
+/* 控件 */
+.r1{display:flex;align-items:center;gap:12px}
+.btn{flex:none;min-height:38px;padding:0 20px;border-radius:9px;background:#1f2937;color:#fff;font-size:14px;font-weight:600}
+.st{min-width:0;font-size:13.5px;line-height:1.45;color:#39424f;font-variant-numeric:tabular-nums}
+.grp{margin-top:14px}
+.lb{margin-bottom:6px;font-size:12.5px;line-height:1.4;color:#5b6472}
+.seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;max-width:420px}
+.seg4{grid-template-columns:repeat(4,minmax(0,1fr));max-width:520px}
+.seg button{min-height:36px;padding:0 4px;border-radius:8px;background:#f0f1f4;color:#2b3340;font-size:13.5px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.seg button.on{background:#1f2937;color:#fff}
+.seg button:disabled{opacity:.4}
+.sbd{margin-top:8px;padding:8px 10px;border-radius:8px;background:#f7f8fa;font-size:13px;line-height:1.5;color:#39424f}
+.sbd.hint{color:#7a8391}
+#scrub{-webkit-appearance:none;appearance:none;display:block;width:100%;height:28px;margin:0;background:transparent;--p:0%}
+#scrub::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(90deg,#EAC070 var(--p),#e3e6ea var(--p))}
+#scrub::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;margin-top:-6px;border-radius:50%;background:#1f2937;border:3px solid #fff;box-shadow:0 0 0 1px #c3c8d0}
+#scrub::-moz-range-track{height:6px;border-radius:3px;background:#e3e6ea}
+#scrub::-moz-range-progress{height:6px;border-radius:3px;background:#EAC070}
+#scrub::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:#1f2937;border:3px solid #fff;box-shadow:0 0 0 1px #c3c8d0}
+#scrub:disabled{opacity:.4}
+.ruler{position:relative;height:18px;margin:0 9px;font-size:11px;line-height:18px;color:#7a8391;font-variant-numeric:tabular-nums}
+.ruler span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap}
+.tg{display:flex;align-items:center;gap:12px;width:100%;margin-top:16px;padding:10px 12px;border-radius:10px;background:#f7f8fa;text-align:left}
+.tg i{flex:none;position:relative;width:44px;height:26px;border-radius:13px;background:#c3c8d0;transition:background .2s}
+.tg i:after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .2s}
+.tg[aria-checked="true"] i{background:#1f2937}
+.tg[aria-checked="true"] i:after{transform:translateX(18px)}
+.tg b{display:block;font-size:14px;line-height:1.4}
+.tg span{display:block;font-size:12.5px;line-height:1.45;color:#5b6472}
+.rm{margin-top:8px;font-size:12.5px;line-height:1.5;color:#8a4b12}
+.plain{list-style:none;font-size:13.5px;color:#39424f}
+.plain li{margin:4px 0}
+.tbl{width:100%;border-collapse:collapse;table-layout:fixed;font-size:13px;line-height:1.5}
+.tbl th,.tbl td{padding:7px 8px;border-top:1px solid #edeff2;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+.tbl th{background:#f7f8fa;color:#5b6472;font-weight:600}
+.tbl th:first-child{width:100px}
+.tbl td:first-child{white-space:nowrap;font-variant-numeric:tabular-nums;color:#2b3340;font-weight:600}
+@media (prefers-reduced-motion:reduce){.tg i,.tg i:after{transition:none}}
+@media (max-width:859px){
+  .wrap{padding:14px 12px 40px}
+  .main{grid-template-columns:minmax(0,1fr);grid-template-rows:none;grid-template-areas:"hd" "ctl" "ph" "nts";gap:12px}
+  .a-ph{position:static;display:flex;justify-content:center}
+  .hd h1{font-size:20px}
+  .card{padding:14px}
+  .btn{min-height:44px;font-size:15px}
+  .seg,.seg4{max-width:none}
+  .seg button{min-height:44px;font-size:15px}
+  #scrub{height:36px}
+  #scrub::-webkit-slider-thumb{width:24px;height:24px;margin-top:-9px}
+  .ruler{margin:0 12px}
+  .tg{min-height:56px}
+}
+
+/* 手机画面：按 390×844 画，外层整体等比缩放 */
+.stage{position:relative;width:390px;height:844px}
+.phone{position:absolute;left:0;top:0;width:390px;height:844px;overflow:hidden;border-radius:16px;background:#0b0e14;box-shadow:0 10px 26px rgba(16,24,40,.22);transform-origin:0 0;color:#fff;font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Roboto,Arial,sans-serif;user-select:none;-webkit-user-select:none}
+.phone .bg{position:absolute;left:0;top:0;display:block;width:390px;height:auto}
+.ga{position:absolute;left:0;right:0;top:87px;height:679px;overflow:hidden;z-index:3}
+.dock{position:absolute;right:-3px;top:150px;display:block;width:30px;height:40px;opacity:.92}
+.br-t{position:absolute;left:0;right:0;top:0;height:87px;z-index:6;background:#F7F7F7;color:#000;box-shadow:0 .5px 0 rgba(0,0,0,.16)}
+.clk{position:absolute;left:0;top:13px;width:97px;text-align:center;font:600 16px/21px -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;letter-spacing:-.2px}
+.notch{position:absolute;left:95px;top:0;width:200px;height:31px;border-radius:0 0 19px 19px;background:#000}
+.notch:before,.notch:after{content:"";position:absolute;top:0;width:8px;height:8px}
+.notch:before{left:-8px;background:radial-gradient(circle at 0 100%,transparent 7.5px,#000 8px)}
+.notch:after{right:-8px;background:radial-gradient(circle at 100% 100%,transparent 7.5px,#000 8px)}
+.notch i{position:absolute;background:#1d1d22}
+.notch i:first-child{left:78px;top:12px;width:44px;height:5px;border-radius:3px}
+.notch i:last-child{left:136px;top:10px;width:9px;height:9px;border-radius:50%;background:#14141f}
+.sbi{position:absolute;left:305px;top:18px;display:block}
+.adr{position:absolute;left:0;right:0;top:47px;height:34px}
+.adr .dn{position:absolute;left:13px;top:0;font-size:16px;line-height:34px;color:#8A8A8E}
+.adr .url{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;justify-content:center;gap:7px;font:600 16px/34px -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;color:#000}
+.adr .url svg{display:block}
+.adr .aa{position:absolute;left:314px;top:0;font-size:13px;line-height:34px;color:#6E6E73}
+.adr .aa small{font-size:10px}
+.adr .rl{position:absolute;left:356px;top:9px;display:block}
+.br-b{position:absolute;left:0;right:0;bottom:0;height:78px;z-index:6;background:#F7F7F7;box-shadow:0 -.5px 0 rgba(0,0,0,.16)}
+.br-b svg{display:block}
+
+/* 顶部通知（设计规则第 4、5 条）：最终样式就是常态，动效从这里倒推 */
+.nt{position:absolute;left:12px;right:12px;top:10px;z-index:5;display:flex;align-items:center;min-height:48px;padding:12px 11px 12px 15px;border-radius:12px;background:#2F3542;border:1px solid rgba(255,255,255,.1);box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.lk{flex:none;display:block;width:20px;height:20px;margin-right:8px;transform-origin:50% 60%}
+.lk svg{display:block;width:20px;height:20px;overflow:visible;color:#EAC070}
+.lk .sh{fill:none;stroke:currentColor;stroke-width:1.6;stroke-dasharray:73.4 26.6}
+.lk .bd{fill:currentColor}
+.lk .kh{fill:#2F3542}
+.tx{flex:1 1 auto;min-width:0;font-size:13px;line-height:18px;font-weight:500;color:#fff}
+.tx b{font-weight:600;color:#EAC070}
+.vb{flex:none;height:28px;margin-left:8px;padding:0 13px;border-radius:14px;background:linear-gradient(90deg,#EAC070,#F4D38F);color:#181B21;font-size:13px;line-height:28px;font-weight:600;white-space:nowrap}
+.xx{position:relative;flex:none;display:block;width:20px;height:20px;margin-left:8px;color:#8F98A6}
+.xx:before{content:"";position:absolute;top:-12px;right:-10px;bottom:-12px;left:-4px}
+.xx svg{display:block;width:20px;height:20px}
+.xx path{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
+.fx{position:absolute;top:0;right:0;bottom:0;left:0;z-index:2;overflow:hidden;border-radius:11px;-webkit-clip-path:inset(0 round 11px);clip-path:inset(0 round 11px);pointer-events:none}
+.swp{position:absolute;top:-12px;bottom:-12px;left:0;width:44px;background:linear-gradient(90deg,rgba(255,236,186,0),rgba(255,236,186,.8) 50%,rgba(255,236,186,0));transform:translateX(404px) skewX(-20deg)}
+.nt.still .swp,.nt.done .swp{display:none}
+
+/* 解锁动效：全部 1.5 秒同一起点，百分比就是时间轴（10% = 0.15 秒） */
+.nt.run{animation:nt-in 1.5s linear both}
+.nt.run .lk{animation:lk-move 1.5s linear both}
+.nt.run .lk svg{animation:lk-color 1.5s linear both}
+.nt.run .sh{animation:lk-open 1.5s linear both}
+.nt.run .tx,.nt.run .xx{animation:fade-in 1.5s linear both}
+.nt.run .vb{animation:btn-in 1.5s linear both}
+.nt.run .swp{animation:sweep 1.5s linear both}
+/* 0–0.3 秒：从顶部下滑进场 */
+@keyframes nt-in{0%{transform:translateY(calc(-100% - 30px));animation-timing-function:cubic-bezier(.22,.8,.3,1)}20%,100%{transform:translateY(0)}}
+/* 0.3–0.6 秒：锁轻轻晃一下；0.6–0.9 秒：开锁时轻微放大回弹 */
+@keyframes lk-move{
+  0%,20%{transform:rotate(0) scale(1);animation-timing-function:ease-out}
+  24%{transform:rotate(15deg) scale(1);animation-timing-function:ease-in-out}
+  28%{transform:rotate(-10deg) scale(1);animation-timing-function:ease-in-out}
+  32%{transform:rotate(6deg) scale(1);animation-timing-function:ease-in-out}
+  36%{transform:rotate(-3deg) scale(1);animation-timing-function:ease-in-out}
+  40%{transform:rotate(0) scale(1);animation-timing-function:ease-out}
+  48%{transform:rotate(0) scale(1.15);animation-timing-function:ease-in-out}
+  60%,100%{transform:rotate(0) scale(1)}
+}
+/* 0.6–0.85 秒：灰 #8F98A6 变金 #EAC070 */
+@keyframes lk-color{0%,40%{color:#8F98A6;animation-timing-function:ease-out}56.667%,100%{color:#EAC070}}
+/* 0.6–0.8 秒：锁梁弹起 2px、右端从锁身里脱出，再落回成开锁图形（右端留 2px 缺口） */
+@keyframes lk-open{0%,40%{transform:translateY(0);stroke-dasharray:100 0;animation-timing-function:cubic-bezier(.3,0,.4,1)}46.667%{transform:translateY(-2px);stroke-dasharray:73.4 26.6;animation-timing-function:ease-in-out}53.333%,100%{transform:translateY(0);stroke-dasharray:73.4 26.6}}
+/* 0.8–1.0 秒：文字和 × 出现 */
+@keyframes fade-in{0%,53.333%{opacity:0;transform:translateY(4px);animation-timing-function:ease-out}66.667%,100%{opacity:1;transform:translateY(0)}}
+/* 0.85–1.0 秒：View 出现，1.5 秒回到原大小 */
+@keyframes btn-in{0%,56.667%{opacity:0;transform:scale(.8);animation-timing-function:ease-out}66.667%{opacity:1;transform:scale(1.06);animation-timing-function:ease-in-out}100%{opacity:1;transform:scale(1)}}
+/* 0.8–1.3 秒：金光从左到右扫过，只在通知条内（.fx 裁切） */
+@keyframes sweep{0%,53.333%{transform:translateX(-64px) skewX(-20deg);animation-timing-function:cubic-bezier(.45,0,.55,1)}86.667%,100%{transform:translateX(404px) skewX(-20deg)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="main">
+  <header class="a-hd hd">
+    <h1>达到门槛通知 · 解锁动效演示</h1>
+    <p>需求 #15769488 厅内挂件展示返水活动：已报名玩家在游戏中第一次达到门槛时，顶部通知播一次解锁动效。节奏和效果供开发、美术参考，最终视觉和动效以 UI 稿和美术交付为准。</p>
+  </header>
+
+  <section class="a-ph" aria-label="手机画面">
+    <div class="stage" id="stage">
+      <div class="phone" id="ph">
+        <img class="bg" src="../assets/game-superace.jpg" alt="" width="390" height="847">
+        <div class="ga" id="ga">
+          <img class="dock" src="../assets/robot-peek.webp" alt="" width="30" height="40">
+        </div>
+        <div class="br-t" aria-hidden="true">
+          <span class="clk">9:41</span>
+          <i class="notch"><i></i><i></i></i>
+          <svg class="sbi" width="68" height="13" viewBox="0 0 68 13"><g fill="#000"><rect x="0" y="8" width="3" height="4" rx=".8"/><rect x="4.6" y="6" width="3" height="6" rx=".8"/><rect x="9.2" y="3.5" width="3" height="8.5" rx=".8"/><rect x="13.8" y="1" width="3" height="11" rx=".8"/><path d="M28.6 12l-2.5-2.9a3.9 3.9 0 0 1 5 0z"/><path d="M23.9 6.6a7.2 7.2 0 0 1 9.4 0l-1.5 1.8a4.9 4.9 0 0 0-6.4 0z"/><path d="M21.1 3.4a11.4 11.4 0 0 1 15 0l-1.5 1.8a9 9 0 0 0-12 0z"/><rect x="41.5" y=".5" width="23" height="11.5" rx="3.3" fill="none" stroke="#000" stroke-opacity=".4"/><rect x="43.5" y="2.5" width="19" height="7.5" rx="1.8"/><path d="M66 4.2v4a2.1 2.1 0 0 0 0-4z" fill-opacity=".4"/></g></svg>
+          <div class="adr">
+            <span class="dn">完成</span>
+            <span class="url"><svg width="11" height="14" viewBox="0 0 11 14"><path d="M2.6 6V4.2a2.9 2.9 0 0 1 5.8 0V6" fill="none" stroke="#000" stroke-width="1.5"/><rect x=".5" y="6" width="10" height="7.5" rx="1.6" fill="#000"/></svg>GameZone.ph</span>
+            <span class="aa">大<small>小</small></span>
+            <svg class="rl" width="17" height="17" viewBox="0 0 17 17"><path d="M14 8.5a5.5 5.5 0 1 1-1.6-3.9" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round"/><path d="M13.4 1.8v3.4H10" fill="none" stroke="#000" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+        <div class="br-b" aria-hidden="true">
+          <svg width="390" height="78" viewBox="0 0 390 78"><g fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M31 16.5 22.5 25 31 33.5" stroke="#C4C4C8"/><path d="M135 16.5 143.5 25 135 33.5" stroke="#C4C4C8"/><g stroke="#8A8A8E" stroke-width="1.8"><path d="M249 11.5v14M244.5 16 249 11.5l4.5 4.5"/><path d="M245 20.5h-3.5v14h15v-14H253"/><circle cx="358" cy="25" r="10"/><path d="m362.6 20.4-3.1 6.1-6.1 3.1 3.1-6.1z" stroke-width="1.6"/></g></g><rect x="128" y="65" width="134" height="5" rx="2.5" fill="#000"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="a-ctl card" aria-label="播放控制">
+    <div class="r1">
+      <button class="btn" id="replay" type="button">重播</button>
+      <div class="st" id="st">准备播放</div>
+    </div>
+    <div class="grp">
+      <div class="lb">时间轴（拖动可停在任意时刻）</div>
+      <input id="scrub" type="range" min="0" max="1500" step="10" value="0" aria-label="时间轴，单位毫秒">
+      <div class="ruler" aria-hidden="true"><span style="left:0">0</span><span style="left:20%">0.3</span><span style="left:40%">0.6</span><span style="left:60%">0.9</span><span style="left:80%">1.2</span><span style="left:100%">1.5 秒</span></div>
+    </div>
+    <div class="grp">
+      <div class="lb">速度</div>
+      <div class="seg" id="spd"><button type="button" data-v="1">1×</button><button type="button" data-v="0.5">0.5×</button><button type="button" data-v="0.25">0.25×</button></div>
+    </div>
+    <div class="grp">
+      <div class="lb">分镜（点了定格在那一帧）</div>
+      <div class="seg seg4" id="sb"><button type="button" data-i="0">0 秒</button><button type="button" data-i="1">0.3 秒</button><button type="button" data-i="2">0.8 秒</button><button type="button" data-i="3">1.5 秒</button></div>
+      <p class="sbd hint" id="sbd">点分镜看对应画面，点「重播」从头播放。</p>
+    </div>
+    <button class="tg" id="tg" type="button" role="switch" aria-checked="false"><i></i><span><b>动效播不了时</b><span>打开后不播动效，直接显示 1.5 秒的样子</span></span></button>
+    <p class="rm" id="rm" hidden>检测到系统开了「减少动态效果」，已直接显示终态；关掉开关可以看动效。</p>
+  </section>
+
+  <section class="a-nts">
+    <div class="card">
+      <h2>动效说明</h2>
+      <ol class="plain">
+        <li>1、只在通知条范围内播放，不盖住游戏画面，不播放声音。</li>
+        <li>2、总时长约 1.5 秒，只播一次，不循环。</li>
+        <li>3、播不了时直接显示第 4 帧。</li>
+        <li>4、交付格式由开发和美术定。</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h2>时间轴</h2>
+      <table class="tbl">
+        <thead><tr><th>时间</th><th>画面</th></tr></thead>
+        <tbody>
+          <tr><td>0 – 0.3 秒</td><td>通知从顶部下滑进场；左侧是关着的灰锁；文字和按钮还没出现</td></tr>
+          <tr><td>0.3 – 0.6 秒</td><td>通知到位，锁轻轻晃一下</td></tr>
+          <tr><td>0.6 – 0.9 秒</td><td>锁打开，变成金色 #EAC070</td></tr>
+          <tr><td>0.8 – 1.3 秒</td><td>一道金光从左到右扫过通知条；文字、View 和 × 出现</td></tr>
+          <tr><td>1.5 秒</td><td>停在常态：开着的金色锁、文案、View、×</td></tr>
+          <tr><td>之后 5 秒</td><td>自动上滑收起；点 × 立即收起</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+</div>
+
+<template id="tpl"><div class="nt"><span class="lk" aria-hidden="true"><svg viewBox="0 0 20 20"><path class="sh" pathLength="100" d="M6.75 10V6a3.25 3.25 0 0 1 6.5 0v4"/><rect class="bd" x="3.5" y="7.5" width="13" height="10.5" rx="2.2"/><circle class="kh" cx="10" cy="11.9" r="1.25"/><rect class="kh" x="9.4" y="11.9" width="1.2" height="2.6" rx=".6"/></svg></span><p class="tx">Rebate unlocked! You now earn <b>1.5%</b> on today's bets.</p><button class="vb" type="button">View</button><button class="xx" type="button" aria-label="关闭"><svg viewBox="0 0 20 20"><path d="M5.25 5.25l9.5 9.5M14.75 5.25l-9.5 9.5"/></svg></button><span class="fx" aria-hidden="true"><i class="swp"></i></span></div></template>
+
+<script>
+(()=>{
+  const DUR=1.5,HOLD=5,OUT=.25;
+  // 四帧分镜：文字逐字照抄契约；t 是定格取的画面时刻（和 Figma 分镜帧一致）
+  const SB=[
+    {t:.1,d:'1｜0 秒：通知从顶部下滑进场，左侧是关着的锁，文字还没出现'},
+    {t:.36,d:'2｜0.3 秒：通知到位，锁轻轻晃一下'},
+    {t:1.02,d:'3｜0.8 秒：锁打开变成金色，一道金光从左到右扫过通知条，文字出现'},
+    {t:1.5,d:'4｜1.5 秒：停在常态，开着的金色锁、文案和 View 按钮；再过 5 秒自动收起'}
+  ];
+  const $=s=>document.querySelector(s);
+  const ga=$('#ga'),tpl=$('#tpl'),st=$('#st'),scrub=$('#scrub'),sbd=$('#sbd'),tg=$('#tg'),rm=$('#rm');
+  const mq=window.matchMedia?matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+  const CAN=typeof Element.prototype.getAnimations==='function';
+  const S={rate:1,still:!CAN||mq.matches,mode:"idle",base:0,t0:0,h0:0,sb:-1,why:"",node:null,timer:0,raf:0};
+  const now=()=>performance.now()/1000;
+  const T=()=>S.mode==='play'?S.base+(now()-S.t0)*S.rate:S.mode==='still'?now()-S.t0:S.base;
+
+  function mount(cls){
+    ga.querySelectorAll(".nt").forEach(e=>e.remove()); // 连同正在收起的旧通知一起清掉，同一时间只显示一条
+    const n=tpl.content.firstElementChild.cloneNode(true);
+    n.className='nt '+cls;ga.appendChild(n);S.node=n;return n;
+  }
+  const anims=n=>n.getAnimations({subtree:true});
+  function stopTimer(){clearTimeout(S.timer);S.timer=0}
+
+  function play(){
+    stopTimer();S.sb=-1;S.h0=0;
+    if(S.still){
+      mount('still');S.mode='still';S.t0=now();
+      S.timer=setTimeout(()=>hide('auto'),HOLD*1000);
+      return ui();
+    }
+    const n=mount('run'),list=anims(n);
+    for(const a of list){a.playbackRate=S.rate;a.currentTime=0;a.play()}
+    S.mode='play';S.base=0;S.t0=now();
+    // 播完：换成不带动画的终态（和「播不了时」同一份样式，停留期间不占动画图层），从这一刻起停留 5 秒再收起
+    Promise.all(list.map(a=>a.finished)).then(()=>{
+      if(S.node!==n||S.mode!=='play')return;
+      n.className='nt done';S.h0=now();
+      S.timer=setTimeout(()=>hide('auto'),HOLD/S.rate*1000);
+    },()=>{});
+    ui();
+  }
+  function freeze(t,i){
+    stopTimer();S.sb=i==null?-1:i;
+    const n=S.mode==='freeze'&&S.node?S.node:mount('run');
+    for(const a of anims(n)){a.pause();a.currentTime=t*1000}
+    S.mode='freeze';S.base=t;ui();
+  }
+  function hide(why){
+    const n=S.node;if(!n||S.mode==='gone')return;
+    stopTimer();S.mode='gone';S.why=why;S.sb=-1;S.node=null;
+    n.style.pointerEvents='none';
+    if(S.still){n.remove();return ui()}
+    const from=getComputedStyle(n).transform;
+    const a=n.animate([{transform:from==='none'?'translateY(0)':from},{transform:'translateY(calc(-100% - 30px))'}],{duration:OUT*1000,easing:'cubic-bezier(.4,0,1,1)',fill:'forwards'});
+    a.playbackRate=S.rate;
+    n.dataset.out='1';
+    a.onfinish=()=>n.remove();
+    ui();
+  }
+
+  function ui(){
+    document.querySelectorAll('#spd button').forEach(b=>{b.classList.toggle('on',+b.dataset.v===S.rate);b.disabled=S.still});
+    document.querySelectorAll('#sb button').forEach((b,i)=>{b.classList.toggle('on',i===S.sb);b.disabled=S.still});
+    scrub.disabled=S.still;
+    tg.setAttribute('aria-checked',String(S.still));
+    rm.hidden=!mq.matches;
+    if(S.sb>=0){sbd.textContent=SB[S.sb].d;sbd.classList.remove('hint')}
+    else{sbd.textContent=S.still?'开着「动效播不了时」：不播动效，分镜、时间轴和速度暂不可用。':'点分镜看对应画面，点「重播」从头播放。';sbd.classList.add('hint')}
+    tick();
+    if((S.mode==='play'||S.mode==='still')&&!S.raf)S.raf=requestAnimationFrame(loop);
+  }
+  function loop(){S.raf=0;tick();if(S.mode==='play'||S.mode==='still')S.raf=requestAnimationFrame(loop)}
+  function tick(){
+    let s,v=+scrub.value;
+    const sp=S.rate===1?'':`（${S.rate}×）`;
+    if(S.mode==='play'){
+      if(S.h0){s=`停在常态，${Math.max(0,HOLD-(now()-S.h0)*S.rate).toFixed(1)} 秒后自动收起${sp}`;v=1500}
+      else{const t=Math.min(T(),DUR);s=`播放中 ${t.toFixed(2)} 秒${sp}`;v=t*1000}
+    }else if(S.mode==='still'){s=`直接显示常态，${Math.max(0,HOLD-T()).toFixed(1)} 秒后自动收起`;v=1500}
+    else if(S.mode==='freeze'){s=`定格在 ${S.base.toFixed(2)} 秒`;v=S.base*1000}
+    else if(S.mode==='gone'){s={auto:'停留 5 秒后已自动收起',x:'点了 ×，已立即收起',view:'点了通知，已收起；正式版会同时展开挂件面板'}[S.why]||'已收起'}
+    else s='准备播放';
+    st.textContent=s;
+    scrub.value=String(Math.round(v));
+    scrub.style.setProperty('--p',(Math.min(1500,Math.max(0,v))/15).toFixed(2)+'%');
+  }
+
+  $('#replay').addEventListener('click',play);
+  $('#spd').addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b.disabled)return;S.rate=+b.dataset.v;play()});
+  $('#sb').addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b.disabled)return;const i=+b.dataset.i;freeze(SB[i].t,i)});
+  scrub.addEventListener('input',()=>{if(!S.still)freeze(+scrub.value/1000)});
+  tg.addEventListener('click',()=>{if(!CAN)return;S.still=!S.still;play()});
+  ga.addEventListener('click',e=>{const n=e.target.closest('.nt');if(!n||n!==S.node)return;hide(e.target.closest('.xx')?'x':'view')});
+  if(mq.addEventListener)mq.addEventListener('change',()=>{if(!CAN)return;S.still=mq.matches;play()});
+
+  // 等比缩放：桌面按视口高度放下整台手机，手机浏览器按宽度
+  const stage=$('#stage'),ph=$('#ph');
+  function fit(){
+    const vw=document.documentElement.clientWidth,wide=vw>=860;
+    const k=Math.max(.5,Math.min(1,(wide?390:vw-24)/390,wide?(innerHeight-32)/844:1));
+    stage.style.width=390*k+'px';stage.style.height=844*k+'px';
+    ph.style.transform=k<1?`scale(${k})`:'';
+  }
+  addEventListener('resize',fit);fit();ui();
+
+  // 打开页面自动播一次；页面在后台时等切回来再播
+  let started=false;
+  const start=()=>{if(started)return;started=true;setTimeout(play,600)};
+  const go=()=>{if(!document.hidden)start();else document.addEventListener('visibilitychange',function f(){if(!document.hidden){document.removeEventListener('visibilitychange',f);start()}})};
+  if(document.readyState==='complete')go();else addEventListener('load',go);
+})();
+</script>
+</body>
+</html>
