@@ -148,10 +148,14 @@ button:disabled{cursor:not-allowed}
 .rb-r b.lk{color:#C7C2D0}
 .rb-r b.au{color:#FBCB62}
 .rlk{display:block;width:9px;height:11px;flex:none}
-.rb-c,.rb-n{text-align:right;font-size:9.5px;line-height:13px;font-weight:600;color:#C7C2D0;white-space:nowrap}
-.rb-c{line-height:14px}
-.rb-c.au,.rb-n.au{color:#FBCB62}
-.max{display:inline-block;vertical-align:top;height:11px;margin:1px 3px 0 0;padding:0 3px;border-radius:3px;background:linear-gradient(180deg,#FFDE86,#F6A828);color:#3A2300;font-style:normal;font-size:8px;line-height:11px;font-weight:900;letter-spacing:.2px}
+/* 说明行（便签三第 4 条、设计规则第 2 条）：靠左，金色，9.5 Semi Bold */
+.rb-n{text-align:left;font-size:9.5px;line-height:13px;font-weight:600;color:#FBCB62;white-space:nowrap}
+/* 封顶（便签三第 5 条）：今日返水金额下面单独一行，只有 MAX 小标，靠右。
+   画布上这一行高 5，和上下各隔 3；演示的行盒比画布高（今日返水 16 对 13，说明行 13 对 11），所以写成上 1 下 2，位置和画布一样，返水块高 95 */
+.rb-m{display:flex;justify-content:flex-end;height:5px;margin:1px 0 2px}
+/* MAX 小标：外框 25×5 金色渐变胶囊；字约 5px，先按 12px 排再缩小，避开浏览器最小字号，外框不缩 */
+.max{display:flex;align-items:center;justify-content:center;width:25px;height:5px;border-radius:2.5px;background:linear-gradient(180deg,#FFDE86,#F6A828);font-style:normal}
+.max b{flex:none;color:#3A2300;font-size:12px;line-height:12px;font-weight:900;letter-spacing:.3px;white-space:nowrap;transform:scale(.41667)}
 /* 下载卡（同事的下载引导）、原 Rebate 行、推荐游戏：沿用线上 */
 .dlc{position:relative;display:flex;align-items:center;gap:6px;height:62px;margin-top:8px;padding:0 7px;border-radius:8px;background:linear-gradient(90deg,#2C3A6E,#5F6E9E)}
 .pn.vip .dlc{margin-top:7px}
@@ -174,7 +178,8 @@ button:disabled{cursor:not-allowed}
 .dp-x{position:absolute;right:1px;top:9px;width:40px;height:40px;border-radius:20px}
 .dp-go{position:absolute;left:262px;top:53px;width:116px;height:47px;border-radius:12px}
 
-.toast{position:absolute;left:50%;top:115px;z-index:19;transform:translateX(-50%);max-width:340px;padding:8px 14px;border-radius:8px;background:rgba(0,0,0,.8);color:#fff;font-size:13px;line-height:18px;font-weight:600;white-space:nowrap;pointer-events:none;animation:tin .2s ease-out}
+/* toast 在整个手机画面（390×844）正中：画面中线 y=422，游戏区从 y=87 开始，所以在游戏区里 top 是 335；盖在面板和厅内充值上面 */
+.toast{position:absolute;left:50%;top:335px;z-index:19;transform:translate(-50%,-50%);max-width:340px;padding:8px 14px;border-radius:8px;background:rgba(0,0,0,.8);color:#fff;font-size:13px;line-height:18px;font-weight:600;white-space:nowrap;pointer-events:none;animation:tin .2s ease-out}
 @keyframes tin{from{opacity:0}to{opacity:1}}
 
 /* ===== 顶部通知（设计规则第 4、5 条）：左右 12，距顶 10，最小高 48，圆角 12 ===== */
@@ -269,6 +274,7 @@ button:disabled{cursor:not-allowed}
       <div class="grp">
         <div class="lb">2、活动配置<small>比例 1.5%、门槛 ₱500 固定；默认没有返水上限</small></div>
         <div class="seg s2" id="c-cap"><button type="button" data-v="0">没有返水上限</button><button type="button" data-v="1">有返水上限 ₱200</button></div>
+        <p class="hint" id="c-caphint">有返水上限时，没到上限和没有上限一样；达到门槛且今日返水到了上限，今日返水金额下面多一个 MAX 标（便签三第 5 条）。</p>
       </div>
     </div>
 
@@ -328,22 +334,18 @@ button:disabled{cursor:not-allowed}
   const kilo = t => P + grp(String(Math.floor(t / 10))) + (t % 10 ? '.' + (t % 10) : '') + 'K'; // t：以 0.1K（₱100）计
   // 今日投注：不满 ₱10,000 两位小数（向下）；满 ₱10,000 带 K，K 前 1 位小数向下截断
   const betC = c => c < 1e6 ? two(c) : kilo(Math.floor(c / 1e4));
-  // 今日返水、上限：不满 ₱100 两位小数；满 ₱100 不带小数向下取整；满 ₱10,000 带 K 向下截断
+  // 今日返水：不满 ₱100 两位小数；满 ₱100 不带小数向下取整；满 ₱10,000 带 K 向下截断（操作面板里的上限金额也用这个写法，玩家端不显示上限）
   const rebC = c => c < 1e4 ? two(c) : c < 1e6 ? P + grp(String(Math.floor(c / 100))) : kilo(Math.floor(c / 1e4));
   // 还差多少：先向上取整到元、不带小数；取整后满 ₱10,000 带 K，K 前 1 位小数向上取
   const gapC = c => { const y = Math.ceil(c / 100); return y < 1e4 ? P + grp(String(y)) : kilo(Math.ceil(y / 100)); };
   const floorC = n => Math.floor(n * 100 + 1e-6), ceilC = n => Math.ceil(n * 100 - 1e-6);
   const fmtRate = r => parseFloat((r * 100).toFixed(4)) + '%'; // 比例取活动配置，去掉末尾的 0
-  // 上限行（便签三第 5 条）：没有返水上限不显示；达到门槛且到了上限换成 MAX 标加 Daily cap reached；未达门槛即使到了上限也不加 MAX
-  function capLineC(bet, cap, thr) {
-    if (!cap) return null;
-    const raw = Math.floor(bet * RATE_BP / 10000);
-    return bet >= thr && raw >= cap ? { max: true, text: 'Daily cap reached' } : { max: false, text: 'Up to ' + rebC(cap) };
-  }
+  // MAX 标（便签三第 5 条）：有返水上限、达到门槛、今日返水到了上限，才在今日返水金额下面加；没到上限和没有上限一样；未达门槛即使到了上限也不加
+  const capMaxC = (bet, cap, thr) => cap > 0 && bet >= thr && Math.floor(bet * RATE_BP / 10000) >= cap;
   // 独立函数，入参单位是元（今日投注、今日返水、上限、还差多少）；返水块和通知都用这几个函数
   window.GZ = Object.freeze({
     fmtBet: n => betC(floorC(n)), fmtRebate: n => rebC(floorC(n)), fmtCap: n => rebC(floorC(n)), fmtGap: n => gapC(ceilC(n)), fmtRate,
-    capLine: (bet, cap, thr) => { const r = capLineC(floorC(bet), floorC(cap), floorC(thr)); return r ? (r.max ? 'MAX ' : '') + r.text : ''; }
+    capMax: (bet, cap, thr) => capMaxC(floorC(bet), floorC(cap), floorC(thr))
   });
 
   // ---------- 状态 ----------
@@ -391,10 +393,9 @@ button:disabled{cursor:not-allowed}
     }
     const rows = `<div class="rb-r"><span>Today's Bet</span><b>${betC(S.betC)}</b></div>`
       + `<div class="rb-r"><span>Today's rebate</span><b class="${m.reached ? 'au' : 'lk'}">${m.reached ? '' : LOCK}${rebC(m.reb)}</b></div>`;
-    const cl = capLineC(S.betC, m.capC, THR);
-    const cap = !cl ? '' : cl.max ? `<div class="rb-c au"><i class="max">MAX</i>${cl.text}</div>` : `<div class="rb-c">${cl.text}</div>`;
-    const note = m.reached ? '<div class="rb-n au">Claimable tomorrow.</div>' : `<div class="rb-n">${S.betC > 0 ? `Bet ${gapC(m.gap)} more to unlock` : `Bet ${gapC(THR)} to unlock`}</div>`;
-    return `<section class="rb" data-st="${m.lv}">${head}${rows}${cap}${note}</section>`;
+    const max = capMaxC(S.betC, m.capC, THR) ? '<div class="rb-m"><i class="max"><b>MAX</b></i></div>' : '';
+    const note = `<div class="rb-n">${m.reached ? 'Claimable tomorrow.' : S.betC > 0 ? `Bet ${gapC(m.gap)} more to unlock` : `Bet ${gapC(THR)} to unlock`}</div>`;
+    return `<section class="rb" data-st="${m.lv}">${head}${rows}${max}${note}</section>`;
   }
   function panelHTML(m) {
     const btns = '<div class="pn-b"><section data-a="exit"><img src="assets/ic-exit.webp" alt=""><span>Exit</span></section><section data-a="dep-panel"><img src="assets/ic-deposit.webp" alt=""><span>Deposit</span></section><section data-a="reload"><img src="assets/ic-reload.webp" alt=""><span>Reload</span></section></div><div class="pn-d"></div>';
@@ -430,7 +431,7 @@ button:disabled{cursor:not-allowed}
       zero: `Bet <b>${gapC(THR)}</b> to unlock ${r} rebate.`,
       lock: `Bet <b>${gapC(m.gap)}</b> more to unlock ${r} rebate.`,
       open: `You've unlocked ${r} rebate today.`,
-      unlock: `Rebate unlocked! You now earn ${r} on today's bets.`
+      unlock: `Rebate unlocked! Get ${r} back on today's eligible bets.`
     }[kind];
   }
   const ntBtn = k => k === 'join' ? 'Join Now' : k === 'dep' ? 'Deposit' : 'View';
@@ -597,10 +598,10 @@ button:disabled{cursor:not-allowed}
     if (!m.hit) return '没有返水块，Rebate 行保持现状（VIP 比例 ' + fmtRate(VIP_RATE) + '）';
     // 直接读返水块渲染出来的字，保证和手机里一致
     const box = document.createElement('div'); box.innerHTML = blockHTML(m);
-    return [...box.querySelectorAll('.rb-h,.rb-t,.rb-btn,.rb-r,.rb-c,.rb-n')].map(e => {
+    return [...box.querySelectorAll('.rb-h,.rb-t,.rb-btn,.rb-r,.rb-m,.rb-n')].map(e => {
       if (e.matches('.rb-h,.rb-r')) { const [l, v] = e.children; return `<code>${l.textContent} ${v.textContent}</code>` + (v.classList.contains('lk') ? '（上锁）' : v.classList.contains('au') ? '（金色）' : ''); }
       if (e.matches('.rb-btn')) return `按钮 <code>${e.textContent}</code>`;
-      if (e.querySelector('.max')) return `<code>MAX</code> 标 <code>${e.textContent.replace(/^MAX/, '')}</code>`;
+      if (e.matches('.rb-m')) return `金额下面 <code>${e.textContent}</code> 标`;
       return `<code>${e.textContent}</code>`;
     }).join(' ');
   }
@@ -612,11 +613,11 @@ button:disabled{cursor:not-allowed}
       zero: '今日返水上锁，说明 Bet ₱500 to unlock（便签三第 4 条）。用「再投一注」越过门槛时，顶部弹带解锁动效的达到门槛通知，返水块同时解锁（便签五）。',
       lock: `今日返水上锁，还差多少向上取整（便签三第 8 条）。用「再投一注」越过门槛时弹达到门槛通知，每个活动每天 1 次${m.capC ? '；越过时已经封顶的不弹' : ''}（便签五第 1、2 条）。`,
       open: '今日返水金色，说明 Claimable tomorrow. 进厅时已报名且已达门槛的，不弹达到门槛通知，由进厅通知提示（便签五第 2 条）。',
-      cap: '今日返水显示上限，MAX 标加 Daily cap reached（便签三第 5 条）；封顶的玩家进厅和达到门槛都不弹通知（便签四第 9 条）。'
+      cap: '今日返水显示上限金额，金额下面多一个 MAX 标（便签三第 5 条）；封顶的玩家进厅和达到门槛都不弹通知（便签四第 9 条）。'
     }[m.lv];
     let s = `<p class="ex">${ex}</p>`;
-    if (m.joined && !m.capC) s += '<p class="ex">没有返水上限：已报名的返水块没有上限行，也不会封顶（便签三第 5 条）。</p>';
-    if (m.joined && m.capC && m.lv !== 'cap') s += `<p class="ex">有返水上限 ${rebC(m.capC)}：已报名的返水块在今日返水下面多一行 Up to ${rebC(m.capC)}；达到门槛且今日返水到了上限，换成 MAX 标加 Daily cap reached，这时进厅和达到门槛都不弹通知（便签三第 5 条、便签四第 9 条）。</p>`;
+    if (m.joined && !m.capC) s += '<p class="ex">没有返水上限：不会封顶，返水块不会出现 MAX 标（便签三第 5 条）。</p>';
+    if (m.joined && m.capC && m.lv !== 'cap') s += `<p class="ex">有返水上限 ${rebC(m.capC)}：没到上限时，返水块和没有返水上限时一样；达到门槛且今日返水到了 ${rebC(m.capC)}，今日返水金额下面多一个 MAX 标，这时进厅和达到门槛都不弹通知（便签三第 5 条、便签四第 9 条）。</p>`;
     if (S.sheet) s += '<p class="ex warn">厅内充值开着：通知照常弹，盖在充值上面；这时点 View 或点通知其他位置，只收起通知，不关充值、不展开面板（便签四第 5、7 条）。点充值里的红色 Deposit 或「模拟到账」= 付款到账。</p>';
     return s;
   }
